@@ -85,14 +85,46 @@ export default function Footer() {
                   <polyline points="2 12 12 17 22 12"></polyline>
                 </svg>
               </div>
-              <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-brand-600 to-slate-900 dark:from-white dark:via-brand-400 dark:to-white bg-clip-text text-transparent">
-                ARCUS
-              </span>
+              <div className="flex flex-col">
+                <span className="text-xl font-extrabold tracking-wider bg-gradient-to-r from-slate-900 via-brand-600 to-slate-900 dark:from-white dark:via-brand-400 dark:to-white bg-clip-text text-transparent leading-none">
+                  ARCUS
+                </span>
+                <span className="text-[9px] font-bold tracking-widest uppercase bg-gradient-to-r from-brand-600 to-indigo-500 bg-clip-text text-transparent mt-0.5 flex items-center gap-1">
+                  <Sparkles className="w-2.5 h-2.5 text-amber-500 inline" />
+                  <span>Shop with Pride</span>
+                </span>
+              </div>
             </div>
 
             <p className="text-xs text-slate-500 max-w-sm leading-relaxed">
-              Curated for creators, engineers, and modern aesthetes. We engineer tomorrow’s acoustic architecture, aerospace wearable hardware, and smart minimalist living.
+              Curated for creators, engineers, and modern aesthetes. Shop with Pride with official warranties, rapid Pathao delivery, and direct 24/7 support.
             </p>
+
+            {/* Quick Contact Links in Footer */}
+            <div className="flex items-center gap-2 pt-1 text-xs">
+              <a
+                href="https://wa.me/8801700000000"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2.5 py-1 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-semibold flex items-center gap-1.5 transition-colors"
+              >
+                <span>WhatsApp</span>
+              </a>
+              <a
+                href="https://facebook.com/sazimhasanpial"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2.5 py-1 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-500/20 font-semibold flex items-center gap-1.5 transition-colors"
+              >
+                <span>Facebook</span>
+              </a>
+              <a
+                href="mailto:sajimhasan12@gmail.com"
+                className="px-2.5 py-1 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/20 font-semibold flex items-center gap-1.5 transition-colors"
+              >
+                <span>Email Us</span>
+              </a>
+            </div>
 
             {/* Newsletter */}
             <form onSubmit={handleSubscribe} className="space-y-2 pt-2 max-w-sm">
