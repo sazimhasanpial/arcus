@@ -13,8 +13,7 @@ import {
   X,
   Sparkles,
   MapPin,
-  Check,
-  Bot
+  Check
 } from 'lucide-react';
 
 export default function Header() {
@@ -64,72 +63,34 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-2xl bg-white/85 dark:bg-slate-950/85 border-b border-black/[0.06] dark:border-white/[0.08] shadow-[0_4px_25px_rgba(0,0,0,0.03)] transition-all duration-300">
-      {/* 🌟 Top Luxury Utility Bar */}
-      <div className="w-full bg-slate-950 text-slate-300 dark:bg-black/95 dark:text-slate-300 text-[10px] sm:text-xs py-1.5 px-3 sm:px-6 lg:px-8 border-b border-white/[0.08] transition-colors">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
-          {/* Left: Shop with Pride indicator */}
-          <div className="flex items-center gap-2">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-brand-500/25 via-indigo-500/20 to-purple-500/25 text-brand-300 border border-brand-500/35 text-[9.5px] sm:text-[10px] font-extrabold tracking-wider uppercase shadow-sm">
-              <Sparkles className="w-2.5 h-2.5 text-amber-400 animate-spin" style={{ animationDuration: '6s' }} />
-              <span>Shop with Pride</span>
-            </div>
-            <span className="hidden sm:inline text-slate-400 text-[11px] font-medium">
-              • Official Flagship Store
-            </span>
-            <span className="hidden md:inline text-slate-500 text-[10px]">
-              • Banani, Dhaka
-            </span>
-          </div>
-
-          {/* Right: Service Status Bar */}
-          <div className="flex items-center gap-2 sm:gap-4 text-[11px]">
-            <div className="flex items-center gap-1.5 text-emerald-400 font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Pathao Express Nationwide Delivery</span>
-            </div>
-            <span className="hidden md:inline text-slate-600">|</span>
-            <div className="hidden md:flex items-center gap-1 text-slate-400">
-              <Bot className="w-3.5 h-3.5 text-brand-400" />
-              <span>24/7 AI Concierge Active</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Header Navigation Bar */}
+    <header className="sticky top-0 z-40 w-full backdrop-blur-2xl bg-white/90 dark:bg-slate-950/90 border-b border-black/[0.06] dark:border-white/[0.08] shadow-[0_4px_25px_rgba(0,0,0,0.03)] transition-all duration-300">
+      {/* Unified Single-Line Luxury Navigation Bar */}
       <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
-        <div className="h-14 sm:h-16 flex items-center justify-between gap-3">
-          {/* Brand Logo & Shop with Pride (Gorgeous Typography) */}
-          <div className="flex items-center gap-2.5 shrink-0">
+        <div className="h-16 flex items-center justify-between gap-3">
+          {/* Brand Logo & Clean Shop with Pride Tag */}
+          <div className="flex items-center gap-3 shrink-0">
             <a href="#" className="flex items-center gap-2.5 group active:scale-95 transition-transform">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-brand-600 via-brand-500 to-indigo-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/30 ring-1 ring-white/20 group-hover:scale-105 transition-transform duration-300">
-                <svg className="w-4 h-4 sm:w-5 sm:h-5 stroke-current fill-none stroke-2" viewBox="0 0 24 24">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-brand-600 via-brand-500 to-indigo-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/25 ring-1 ring-white/20 group-hover:scale-105 transition-transform duration-300">
+                <svg className="w-5 h-5 stroke-current fill-none stroke-2" viewBox="0 0 24 24">
                   <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                   <polyline points="2 17 12 22 22 17"></polyline>
                   <polyline points="2 12 12 17 22 12"></polyline>
                 </svg>
               </div>
-              <div className="flex flex-col">
+              <div className="flex items-baseline gap-2">
                 <span className="text-xl sm:text-2xl font-black tracking-[0.14em] bg-gradient-to-r from-slate-950 via-brand-600 to-slate-900 dark:from-white dark:via-brand-400 dark:to-slate-100 bg-clip-text text-transparent leading-none drop-shadow-sm font-sans">
                   ARCUS
                 </span>
-                <span className="text-[8.5px] sm:text-[9.5px] font-extrabold tracking-[0.2em] uppercase bg-gradient-to-r from-brand-600 via-indigo-500 to-purple-600 dark:from-brand-400 dark:via-indigo-300 dark:to-purple-300 bg-clip-text text-transparent mt-0.5 flex items-center gap-1">
-                  <Sparkles className="w-2.5 h-2.5 text-amber-500 inline shrink-0 animate-pulse" />
+                <span className="hidden xs:inline-flex items-center gap-1 text-[9px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded-full bg-brand-500/10 text-brand-600 dark:text-brand-400 border border-brand-500/20">
+                  <Sparkles className="w-2.5 h-2.5 text-amber-500" />
                   <span>Shop with Pride</span>
                 </span>
               </div>
             </a>
-
-            {/* Banani, Dhaka pill (Desktop) */}
-            <div className="hidden xl:flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 text-[10px] text-slate-500">
-              <MapPin className="w-3 h-3 text-emerald-500" />
-              <span>Banani, Dhaka</span>
-            </div>
           </div>
 
           {/* Desktop Live Search Bar */}
-          <div className="flex-1 max-w-lg mx-3 hidden md:block">
+          <div className="flex-1 max-w-md mx-3 hidden md:block">
             <div
               className={`relative flex items-center w-full transition-all duration-200 rounded-full bg-slate-100/90 dark:bg-slate-900/90 border ${
                 isSearchFocused
@@ -144,7 +105,7 @@ export default function Header() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setIsSearchFocused(true)}
                 onBlur={() => setIsSearchFocused(false)}
-                placeholder="Search titanium watch, beryllium headphones, mechanical gear..."
+                placeholder="Search headphones, titanium watch, gear..."
                 className="w-full py-2 pl-2.5 pr-8 bg-transparent text-xs sm:text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none"
               />
               {searchQuery && (
@@ -352,7 +313,7 @@ export default function Header() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search titanium audio, watches, apparel..."
+              placeholder="Search audio, watches, apparel..."
               className="w-full py-1.5 pl-2 pr-8 bg-transparent text-xs text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none"
             />
             {searchQuery && (
