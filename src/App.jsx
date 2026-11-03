@@ -20,18 +20,18 @@ export default function App() {
   return (
     <StoreProvider>
       <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200 pb-20 md:pb-0">
-        {/* Flash Sale Banner with Live Timer */}
-        <FlashBanner />
-
-        {/* Sticky Modern Header */}
+        {/* Sticky iOS Top Navigation Header */}
         <Header />
 
-        {/* Bangladesh Security & Compliance Trust Bar */}
-        <SecurityBadgeBar />
+        {/* Flash Sale Banner with Live Timer */}
+        <FlashBanner />
 
         {/* Hero Section */}
         <main className="flex-1">
           <HeroBanner />
+
+          {/* Bangladesh Security & Compliance Trust Bar */}
+          <SecurityBadgeBar />
 
           {/* Interactive Catalog & Filtering */}
           <ProductGrid />
