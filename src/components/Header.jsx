@@ -60,7 +60,8 @@ export default function Header() {
     setIsWishlistOpen,
     setIsCompareOpen,
     setIsAccountOpen,
-    userProfile
+    userProfile,
+    isLoggedIn
   } = useStore();
 
   const [isThemeOpen, setIsThemeOpen] = useState(false);
@@ -497,8 +498,8 @@ export default function Header() {
                       e.target.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80';
                     }}
                   />
-                  {userProfile.emailVerified && (
-                    <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-1 ring-white dark:ring-slate-900" title="Verified Account" />
+                  {isLoggedIn && (
+                    <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-1 ring-white dark:ring-slate-900" title="Active Account" />
                   )}
                 </div>
               </button>

@@ -13,7 +13,8 @@ export default function MobileBottomNav() {
     setIsWishlistOpen,
     setIsCompareOpen,
     setIsAccountOpen,
-    userProfile
+    userProfile,
+    isLoggedIn
   } = useStore();
 
   const scrollToCatalog = () => {
@@ -92,7 +93,7 @@ export default function MobileBottomNav() {
                 e.target.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80';
               }}
             />
-            {userProfile.emailVerified && (
+            {isLoggedIn && (
               <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 ring-1 ring-white" />
             )}
           </div>

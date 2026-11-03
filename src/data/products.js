@@ -453,10 +453,10 @@ export const PROMO_CODES = {
 
 export const INITIAL_USER_PROFILE = {
   name: 'Sazim Hasan Pial',
+  userId: 'sajimhasan12@gmail.com',
+  username: 'sazimhasanpial',
   email: 'sajimhasan12@gmail.com',
-  emailVerified: false,
-  emailVerifiedAt: null,
-  emailVerificationCode: '849201',
+  password: 'password123',
   tier: 'Platinum VIP',
   points: 2450,
   avatar: 'https://github.com/sazimhasanpial.png',

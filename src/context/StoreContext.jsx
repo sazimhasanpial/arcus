@@ -246,28 +246,122 @@ export function StoreProvider({ children }) {
     showToast('Simulated next live package dispatch step!');
   };
 
-  // User Profile Email Verification
-  const verifyUserEmail = (code) => {
-    if (code === '849201' || code === userProfile.emailVerificationCode || !code) {
-      const updated = {
-        ...userProfile,
-        emailVerified: true,
-        emailVerifiedAt: new Date().toLocaleDateString('en-GB', {
-          day: 'numeric',
-          month: 'short',
-          year: 'numeric'
-        })
-      };
-      setUserProfile(updated);
-      showToast('Email verified successfully! Official badge linked to sajimhasan12@gmail.com 🛡️');
+  // Auth state & User accounts
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    const saved = localStorage.getItem('arcus_is_logged_in');
+    return saved !== null ? JSON.parse(saved) : true;
+  });
+
+  const [accounts, setAccounts] = useState(() => {
+    try {
+      const saved = localStorage.getItem('arcus_accounts');
+      return saved ? JSON.parse(saved) : [INITIAL_USER_PROFILE];
+    } catch {
+      return [INITIAL_USER_PROFILE];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem('arcus_is_logged_in', JSON.stringify(isLoggedIn));
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    localStorage.setItem('arcus_accounts', JSON.stringify(accounts));
+  }, [accounts]);
+
+  // Register with ID & Password
+  const registerAccount = ({ name, userId, password, phone }) => {
+    if (!name?.trim() || !userId?.trim() || !password?.trim()) {
+      showToast('Please fill in all required fields (Name, ID, Password).', 'error');
+      return false;
+    }
+
+    const cleanId = userId.trim().toLowerCase();
+    const existing = accounts.find(
+      (a) => a.userId?.toLowerCase() === cleanId || a.email?.toLowerCase() === cleanId
+    );
+
+    if (existing) {
+      showToast('This User ID / Email is already registered! Please sign in.', 'error');
+      return false;
+    }
+
+    const newAccount = {
+      ...INITIAL_USER_PROFILE,
+      name: name.trim(),
+      userId: cleanId,
+      email: cleanId.includes('@') ? cleanId : `${cleanId}@arcus.store`,
+      password: password.trim(),
+      phone: phone?.trim() || '+880 1700-000000',
+      tier: 'Gold Member',
+      points: 500, // Welcome bonus points!
+      avatar: `https://api.dicebear.com/7.x/identicon/svg?seed=${cleanId}`,
+      pastTransactions: []
+    };
+
+    const updatedAccounts = [...accounts, newAccount];
+    setAccounts(updatedAccounts);
+    setUserProfile(newAccount);
+    setIsLoggedIn(true);
+    showToast(`Account created successfully! Welcome, ${newAccount.name.split(' ')[0]} 🎉`);
+    return true;
+  };
+
+  // Login with ID & Password
+  const loginAccount = ({ userId, password }) => {
+    if (!userId?.trim() || !password?.trim()) {
+      showToast('Please enter both User ID and Password.', 'error');
+      return false;
+    }
+
+    const cleanId = userId.trim().toLowerCase();
+    const found = accounts.find(
+      (a) =>
+        (a.userId?.toLowerCase() === cleanId || a.email?.toLowerCase() === cleanId) &&
+        a.password === password.trim()
+    );
+
+    if (found) {
+      setUserProfile(found);
+      setIsLoggedIn(true);
+      showToast(`Welcome back, ${found.name.split(' ')[0]}! Signed in successfully.`);
       return true;
     }
-    showToast('Invalid verification code. Use demo code 849201.', 'error');
+
+    // Default demo credentials fallback
+    if (
+      (cleanId === 'sajimhasan12@gmail.com' || cleanId === 'pial' || cleanId === 'sazimhasanpial') &&
+      (password === 'password123' || password === '123456')
+    ) {
+      setUserProfile(INITIAL_USER_PROFILE);
+      setIsLoggedIn(true);
+      showToast(`Welcome back, ${INITIAL_USER_PROFILE.name.split(' ')[0]}!`);
+      return true;
+    }
+
+    showToast('Invalid User ID or Password. Please try again.', 'error');
     return false;
   };
 
-  const sendVerificationEmail = () => {
-    showToast('Verification code 849201 sent to sajimhasan12@gmail.com! ✉️');
+  // Logout
+  const logoutAccount = () => {
+    setIsLoggedIn(false);
+    showToast('Signed out successfully.');
+  };
+
+  // Change Password
+  const updatePassword = (newPassword) => {
+    if (!newPassword || newPassword.length < 6) {
+      showToast('Password must be at least 6 characters long.', 'error');
+      return false;
+    }
+    const updated = { ...userProfile, password: newPassword };
+    setUserProfile(updated);
+    setAccounts((prev) =>
+      prev.map((a) => (a.userId === userProfile.userId ? updated : a))
+    );
+    showToast('Password updated successfully! 🔒');
+    return true;
   };
 
   return (
@@ -326,8 +420,12 @@ export function StoreProvider({ children }) {
         setUsePoints,
         userProfile,
         setUserProfile,
-        verifyUserEmail,
-        sendVerificationEmail,
+        isLoggedIn,
+        setIsLoggedIn,
+        registerAccount,
+        loginAccount,
+        logoutAccount,
+        updatePassword,
         simulateNextOrderStep,
         toast,
         showToast
