@@ -7,10 +7,12 @@ export default defineConfig({
   base: './', // Ensures assets load correctly on GitHub Pages or any subpath
   server: {
     port: 5173,
-    host: true
+    host: true,
+    allowedHosts: true
   },
   preview: {
     port: 4173,
-    host: true
+    host: true,
+    allowedHosts: true
   }
 })
