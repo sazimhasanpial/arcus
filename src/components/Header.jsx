@@ -67,7 +67,7 @@ export default function Header() {
       {/* Unified Single-Line Luxury Navigation Bar */}
       <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
         <div className="h-16 flex items-center justify-between gap-3">
-          {/* Brand Logo & Clean Shop with Pride Tag */}
+          {/* Brand Logo: SaaZ™ & BY SAZIM HASAN PIAL */}
           <div className="flex items-center gap-3 shrink-0">
             <a href="#" className="flex items-center gap-2.5 group active:scale-95 transition-transform">
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-brand-600 via-brand-500 to-indigo-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/25 ring-1 ring-white/20 group-hover:scale-105 transition-transform duration-300">
@@ -77,13 +77,17 @@ export default function Header() {
                   <polyline points="2 12 12 17 22 12"></polyline>
                 </svg>
               </div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-xl sm:text-2xl font-black tracking-[0.14em] bg-gradient-to-r from-slate-950 via-brand-600 to-slate-900 dark:from-white dark:via-brand-400 dark:to-slate-100 bg-clip-text text-transparent leading-none drop-shadow-sm font-sans">
-                  ARCUS
-                </span>
-                <span className="hidden xs:inline-flex items-center gap-1 text-[9px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded-full bg-brand-500/10 text-brand-600 dark:text-brand-400 border border-brand-500/20">
-                  <Sparkles className="w-2.5 h-2.5 text-amber-500" />
-                  <span>Shop with Pride</span>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-0.5">
+                  <span className="text-xl sm:text-2xl font-black tracking-wider bg-gradient-to-r from-slate-950 via-brand-600 to-slate-900 dark:from-white dark:via-brand-400 dark:to-slate-100 bg-clip-text text-transparent leading-none drop-shadow-sm font-sans">
+                    SaaZ
+                  </span>
+                  <span className="text-[10px] font-extrabold text-brand-600 dark:text-brand-400 -mt-2">
+                    ™
+                  </span>
+                </div>
+                <span className="text-[7.5px] sm:text-[8.5px] font-extrabold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400 mt-0.5">
+                  BY SAZIM HASAN PIAL
                 </span>
               </div>
             </a>

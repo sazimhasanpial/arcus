@@ -17,7 +17,7 @@ export default function HeroBanner() {
           <div className="lg:col-span-7 space-y-4 sm:space-y-6 text-center lg:text-left">
             <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full glass border border-brand-500/30 text-[10px] sm:text-xs font-semibold text-brand-600 dark:text-brand-400 shadow-sm">
               <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-              <span>Next-Gen 2026 Collection — Arcus Bangladesh</span>
+              <span>Next-Gen 2026 Collection — SaaZ™ Official Store</span>
             </div>
 
             <h1 className="text-2xl sm:text-4xl lg:text-6xl font-black tracking-tight leading-[1.15] text-slate-900 dark:text-white">

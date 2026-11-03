@@ -41,7 +41,7 @@ export default function AiConcierge() {
     {
       id: 1,
       sender: 'bot',
-      text: `নমস্কার / Assalamu Alaikum! I'm Arcus AI, your 24/7 personal shopping concierge.
+      text: `নমস্কার / Assalamu Alaikum! I'm SaaZ AI, your 24/7 personal shopping concierge for SaaZ™ Official Store by Sazim Hasan Pial.
 
 Ask me about flagship acoustics, titanium wearables, bKash payments, Pathao courier delivery, or request to notify an admin directly!`,
       time: 'Just now'
@@ -263,7 +263,7 @@ Ask me about flagship acoustics, titanium wearables, bKash payments, Pathao cour
               </div>
               <div>
                 <h3 className="text-sm font-bold flex items-center gap-1.5">
-                  <span>Arcus AI Concierge</span>
+                  <span>SaaZ™ AI Concierge</span>
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 </h3>
                 <p className="text-[10px] text-brand-100">Live Intelligent Assistant</p>

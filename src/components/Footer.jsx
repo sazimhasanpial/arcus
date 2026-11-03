@@ -86,16 +86,26 @@ export default function Footer() {
           {/* Brand Info & Newsletter (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-600 via-brand-500 to-indigo-500 flex items-center justify-center text-white shadow-md">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 via-brand-500 to-indigo-500 flex items-center justify-center text-white shadow-md">
                 <svg className="w-4 h-4 stroke-current fill-none stroke-2" viewBox="0 0 24 24">
                   <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                   <polyline points="2 17 12 22 22 17"></polyline>
                   <polyline points="2 12 12 17 22 12"></polyline>
                 </svg>
               </div>
-              <span className="text-2xl font-black tracking-wider bg-gradient-to-r from-slate-900 via-brand-600 to-slate-900 dark:from-white dark:via-brand-400 dark:to-white bg-clip-text text-transparent font-sans">
-                ARCUS
-              </span>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-0.5">
+                  <span className="text-2xl font-black tracking-wider bg-gradient-to-r from-slate-900 via-brand-600 to-slate-900 dark:from-white dark:via-brand-400 dark:to-white bg-clip-text text-transparent font-sans leading-none">
+                    SaaZ
+                  </span>
+                  <span className="text-[10px] font-extrabold text-brand-600 dark:text-brand-400 -mt-2">
+                    ™
+                  </span>
+                </div>
+                <span className="text-[8px] font-extrabold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400 mt-0.5">
+                  BY SAZIM HASAN PIAL
+                </span>
+              </div>
             </div>
 
             <p className="text-xs text-slate-500 max-w-sm leading-relaxed">
@@ -233,9 +243,7 @@ export default function Footer() {
         {/* 🌟 3. Single-Line Clean Footer Bar (No second line, no clutter) */}
         <div className="pt-6 mt-8 border-t border-slate-200/60 dark:border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
           <div className="flex flex-wrap items-center gap-2 text-center sm:text-left text-[11px]">
-            <span>© {new Date().getFullYear()} Arcus by SaaZ (Sazim Hasan Pial)</span>
-            <span className="hidden sm:inline">•</span>
-            <span className="hidden sm:inline">Shop with Pride</span>
+            <span>© {new Date().getFullYear()} SaaZ™ Official Store | By Sazim Hasan Pial</span>
           </div>
 
           <button
