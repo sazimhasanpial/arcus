@@ -100,30 +100,14 @@ export default function Footer() {
               Curated for creators, engineers, and modern aesthetes. Shop with Pride with official warranties, rapid Pathao delivery, and direct 24/7 support.
             </p>
 
-            {/* Quick Contact Links in Footer */}
-            <div className="flex items-center gap-2 pt-1 text-xs">
-              <a
-                href="https://wa.me/8801700000000"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-2.5 py-1 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-semibold flex items-center gap-1.5 transition-colors"
-              >
-                <span>WhatsApp</span>
-              </a>
-              <a
-                href="https://facebook.com/sazimhasanpial"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-2.5 py-1 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-500/20 font-semibold flex items-center gap-1.5 transition-colors"
-              >
-                <span>Facebook</span>
-              </a>
-              <a
-                href="mailto:sajimhasan12@gmail.com"
-                className="px-2.5 py-1 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/20 font-semibold flex items-center gap-1.5 transition-colors"
-              >
-                <span>Email Us</span>
-              </a>
+            {/* Compliance & Assurance */}
+            <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
+              <span className="px-2.5 py-1 rounded-xl glass border border-slate-200 dark:border-slate-800 text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+                DBID Registered: DBID-28491024
+              </span>
+              <span className="px-2.5 py-1 rounded-xl glass border border-slate-200 dark:border-slate-800 text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+                e-CAB Member #1489
+              </span>
             </div>
 
             {/* Newsletter */}
