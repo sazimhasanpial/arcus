@@ -35,21 +35,24 @@ export default function FlashBanner() {
   const pad = (n) => String(n).padStart(2, '0');
 
   return (
-    <div className="bg-gradient-to-r from-brand-900 via-brand-700 to-brand-900 text-white text-xs md:text-sm py-2 px-4 shadow-inner relative z-30">
-      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
-          <span className="flex items-center justify-center w-6 h-6 rounded-full bg-brand-500/30 text-amber-300 animate-pulse">
-            <Flame className="w-4 h-4 fill-amber-300" />
+    <div className="bg-gradient-to-r from-brand-900 via-brand-700 to-brand-900 text-white text-[11px] sm:text-xs py-1.5 px-3 shadow-inner relative z-30">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+        <div className="flex items-center gap-1.5 truncate">
+          <span className="flex items-center justify-center w-5 h-5 rounded-full bg-brand-500/30 text-amber-300 shrink-0 animate-pulse">
+            <Flame className="w-3.5 h-3.5 fill-amber-300" />
           </span>
-          <span className="font-semibold tracking-wide">FLASH SALE:</span>
-          <span className="hidden sm:inline text-brand-100">
-            Up to 30% off Titanium & Carbon Gear + Free Global Express Shipping over $200
+          <span className="font-bold tracking-wide shrink-0">FLASH SALE:</span>
+          <span className="hidden sm:inline text-brand-100 truncate">
+            Up to 30% off Titanium & Carbon Gear + Free Express Delivery over $200
+          </span>
+          <span className="sm:hidden text-brand-100 truncate">
+            30% OFF Today
           </span>
         </div>
 
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1.5 font-mono bg-black/30 backdrop-blur-md px-3 py-1 rounded-full text-xs border border-white/10">
-            <Clock className="w-3.5 h-3.5 text-brand-300" />
+        <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1 font-mono bg-black/30 backdrop-blur-md px-2 py-0.5 rounded-full text-[10px] sm:text-xs border border-white/10">
+            <Clock className="w-3 h-3 text-brand-300 hidden xs:inline" />
             <span className="text-white font-bold">{pad(timeLeft.hours)}</span>:
             <span className="text-white font-bold">{pad(timeLeft.minutes)}</span>:
             <span className="text-amber-300 font-bold">{pad(timeLeft.seconds)}</span>
@@ -57,15 +60,15 @@ export default function FlashBanner() {
 
           <button
             onClick={handleCopy}
-            className="flex items-center gap-1.5 bg-white text-brand-900 hover:bg-brand-50 px-3 py-1 rounded-full font-semibold text-xs transition-all shadow-sm active:scale-95"
+            className="flex items-center gap-1 bg-white text-brand-900 hover:bg-brand-50 px-2 sm:px-2.5 py-0.5 rounded-full font-bold text-[10px] sm:text-xs transition-all shadow-sm active:scale-95"
             title="Click to apply coupon code ARCUS20"
           >
-            <Sparkles className="w-3.5 h-3.5 text-brand-600" />
-            <span>Code: <strong>ARCUS20</strong></span>
+            <Sparkles className="w-3 h-3 text-brand-600" />
+            <span>ARCUS20</span>
             {copied ? (
-              <Check className="w-3.5 h-3.5 text-emerald-600" />
+              <Check className="w-3 h-3 text-emerald-600" />
             ) : (
-              <Copy className="w-3.5 h-3.5 text-slate-400" />
+              <Copy className="w-3 h-3 text-slate-400" />
             )}
           </button>
         </div>

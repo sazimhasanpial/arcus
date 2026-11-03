@@ -204,13 +204,13 @@ export default function CheckoutModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-2 sm:p-6 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
       <div
-        className="relative w-full max-w-3xl rounded-3xl glass border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden my-6 flex flex-col"
+        className="relative w-full max-w-3xl rounded-2xl sm:rounded-3xl glass border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden my-2 sm:my-6 flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header */}
-        <div className="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+        <div className="p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
               <ShieldCheck className="w-6 h-6" />
@@ -581,9 +581,9 @@ export default function CheckoutModal() {
             {paymentMethod === 'card' && (
               <div className="space-y-5 text-xs">
                 {/* 3D LIVE CREDIT CARD PREVIEW */}
-                <div className="flex justify-center perspective-1000">
+                <div className="flex justify-center perspective-1000 w-full px-1">
                   <div
-                    className={`relative w-80 sm:w-96 h-52 rounded-2xl shadow-2xl transition-transform duration-700 transform-style-3d ${
+                    className={`relative w-full max-w-[310px] sm:max-w-sm h-44 sm:h-52 rounded-2xl shadow-2xl transition-transform duration-700 transform-style-3d ${
                       isFlipped ? 'rotate-y-180' : ''
                     }`}
                   >

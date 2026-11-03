@@ -13,12 +13,13 @@ import QuickViewModal from './components/QuickViewModal';
 import CheckoutModal from './components/CheckoutModal';
 import UserDashboardModal from './components/UserDashboardModal';
 import AiConcierge from './components/AiConcierge';
+import MobileBottomNav from './components/MobileBottomNav';
 import Toast from './components/Toast';
 
 export default function App() {
   return (
     <StoreProvider>
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200">
+      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200 pb-20 md:pb-0">
         {/* Flash Sale Banner with Live Timer */}
         <FlashBanner />
 
@@ -49,6 +50,9 @@ export default function App() {
 
         {/* Floating AI Shopping Concierge */}
         <AiConcierge />
+
+        {/* Dedicated Mobile Thumb-Friendly Bottom Navigation Bar */}
+        <MobileBottomNav />
 
         {/* Toast Notifications */}
         <Toast />

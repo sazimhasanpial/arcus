@@ -120,24 +120,24 @@ export default function AiConcierge() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-40">
+    <div className="fixed bottom-20 right-3 sm:bottom-6 sm:right-6 z-40">
       {/* Floating Toggle Button */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="relative group p-4 rounded-3xl bg-gradient-to-r from-brand-600 to-indigo-600 text-white shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2.5"
+          className="relative group p-3 sm:p-4 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-brand-600 to-indigo-600 text-white shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
           title="Open AI Shopping Concierge"
           aria-label="AI Shopping Concierge"
         >
-          <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-white dark:border-slate-900 animate-pulse" />
-          <Bot className="w-6 h-6" />
-          <span className="text-xs font-bold hidden sm:inline pr-1">AI Concierge</span>
+          <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 border-2 border-white dark:border-slate-900 animate-pulse" />
+          <Bot className="w-5 h-5 sm:w-6 sm:h-6" />
+          <span className="text-[11px] sm:text-xs font-bold hidden sm:inline pr-1">AI Concierge</span>
         </button>
       )}
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="w-[92vw] sm:w-96 rounded-3xl glass border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col h-[500px] animate-fadeIn">
+        <div className="w-[calc(100vw-1.5rem)] sm:w-96 rounded-3xl glass border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col h-[450px] sm:h-[500px] animate-fadeIn">
           {/* Header */}
           <div className="p-4 bg-gradient-to-r from-brand-600 to-indigo-600 text-white flex items-center justify-between">
             <div className="flex items-center gap-2.5">

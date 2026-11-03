@@ -65,23 +65,23 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 w-full glass border-b border-slate-200/80 dark:border-slate-800/80 transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
         {/* Brand Logo */}
-        <div className="flex items-center gap-3 shrink-0">
-          <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-400 flex items-center justify-center text-white shadow-lg shadow-brand-500/25 group-hover:scale-105 transition-transform duration-300">
-              <svg className="w-6 h-6 stroke-current fill-none stroke-2" viewBox="0 0 24 24">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <a href="#" className="flex items-center gap-2 group">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-400 flex items-center justify-center text-white shadow-lg shadow-brand-500/25 group-hover:scale-105 transition-transform duration-300">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6 stroke-current fill-none stroke-2" viewBox="0 0 24 24">
                 <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                 <polyline points="2 17 12 22 22 17"></polyline>
                 <polyline points="2 12 12 17 22 12"></polyline>
               </svg>
             </div>
             <div>
-              <span className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-brand-600 to-slate-900 dark:from-white dark:via-brand-400 dark:to-white bg-clip-text text-transparent">
+              <span className="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-brand-600 to-slate-900 dark:from-white dark:via-brand-400 dark:to-white bg-clip-text text-transparent">
                 ARCUS
               </span>
               <div className="flex items-center gap-1 -mt-1">
-                <span className="text-[10px] uppercase font-bold tracking-widest text-brand-600 dark:text-brand-400">
+                <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-brand-600 dark:text-brand-400">
                   Bangladesh
                 </span>
                 <span className="text-[10px]">🇧🇩</span>
@@ -95,7 +95,7 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Live Search Bar */}
+        {/* Live Search Bar (Desktop) */}
         <div className="flex-1 max-w-xl mx-2 hidden md:block">
           <div
             className={`relative flex items-center w-full transition-all duration-300 rounded-2xl bg-slate-100/80 dark:bg-slate-900/80 border ${
@@ -127,12 +127,12 @@ export default function Header() {
         </div>
 
         {/* Controls, Tools & Navigation Actions */}
-        <div className="flex items-center gap-2 lg:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-3">
           {/* Theme Selector Dropdown */}
           <div className="relative" ref={themeDropdownRef}>
             <button
               onClick={() => setIsThemeOpen(!isThemeOpen)}
-              className="p-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-1.5 border border-slate-200/60 dark:border-slate-800"
+              className="p-2 sm:p-2.5 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-1 border border-slate-200/60 dark:border-slate-800"
               title="Change Accent Theme"
               aria-label="Theme selector"
             >
@@ -140,7 +140,7 @@ export default function Header() {
               <span className="hidden xl:inline text-xs font-semibold capitalize">
                 {theme}
               </span>
-              <ChevronDown className="w-3 h-3 text-slate-400" />
+              <ChevronDown className="w-3 h-3 text-slate-400 hidden sm:inline" />
             </button>
 
             {isThemeOpen && (
@@ -316,6 +316,28 @@ export default function Header() {
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
+        </div>
+      </div>
+
+      {/* Always Visible Mobile Search Row */}
+      <div className="md:hidden px-3 pb-2.5">
+        <div className="relative flex items-center w-full rounded-xl bg-slate-100/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800">
+          <Search className="w-3.5 h-3.5 ml-3 text-slate-400 shrink-0" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search audio, watches, apparel..."
+            className="w-full py-2 pl-2.5 pr-8 bg-transparent text-xs text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-2.5 p-0.5 rounded-full text-slate-400 hover:text-slate-600"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
       </div>
 

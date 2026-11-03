@@ -41,7 +41,7 @@ export default function ProductGrid() {
     <section className="relative">
       <CategoryFilter totalResults={filteredProducts.length} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
         {filteredProducts.length === 0 ? (
           <div className="py-20 text-center glass rounded-3xl border border-slate-200 dark:border-slate-800 max-w-lg mx-auto p-8 space-y-4">
             <div className="w-16 h-16 mx-auto rounded-3xl bg-brand-500/10 text-brand-500 flex items-center justify-center">
@@ -65,7 +65,7 @@ export default function ProductGrid() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
