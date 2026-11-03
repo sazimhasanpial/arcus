@@ -83,11 +83,19 @@ export default function MobileBottomNav() {
           onClick={() => setIsAccountOpen(true)}
           className="flex flex-col items-center justify-center gap-1 text-slate-600 dark:text-slate-400 hover:text-brand-600 active:scale-95 transition-transform"
         >
-          <img
-            src={userProfile.avatar}
-            alt={userProfile.name}
-            className="w-5 h-5 rounded-full object-cover ring-1 ring-brand-500"
-          />
+          <div className="relative">
+            <img
+              src={userProfile.avatar}
+              alt={userProfile.name}
+              className="w-5 h-5 rounded-full object-cover ring-1 ring-brand-500 bg-slate-800"
+              onError={(e) => {
+                e.target.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80';
+              }}
+            />
+            {userProfile.emailVerified && (
+              <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 ring-1 ring-white" />
+            )}
+          </div>
           <span className="text-[10px] font-bold">VIP</span>
         </button>
       </div>

@@ -18,7 +18,10 @@ import {
   Phone,
   FileText,
   KeyRound,
-  Download
+  Download,
+  Mail,
+  Send,
+  Check
 } from 'lucide-react';
 
 export default function UserDashboardModal() {
@@ -27,16 +30,44 @@ export default function UserDashboardModal() {
     isAccountOpen,
     setIsAccountOpen,
     simulateNextOrderStep,
+    verifyUserEmail,
+    sendVerificationEmail,
     formatPrice
   } = useStore();
 
-  const [activeTab, setActiveTab] = useState('tracking'); // 'tracking' | 'transactions' | 'security'
-  const [selectedReceipt, setSelectedReceipt] = useState(null);
+  const [activeTab, setActiveTab] = useState('tracking'); // 'tracking' | 'verification' | 'transactions' | 'security'
+  const [verificationCode, setVerificationCode] = useState('');
+  const [codeSent, setCodeSent] = useState(false);
+  const [resendTimer, setResendTimer] = useState(0);
 
   if (!isAccountOpen) return null;
 
   const order = userProfile.currentOrder;
   const currentStep = order.statusStep;
+
+  const handleSendCode = () => {
+    setCodeSent(true);
+    sendVerificationEmail();
+    setResendTimer(45);
+    const interval = setInterval(() => {
+      setResendTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
+  const handleVerify = (e) => {
+    e?.preventDefault();
+    verifyUserEmail(verificationCode || '849201');
+  };
+
+  const handleAutoFill = () => {
+    setVerificationCode('849201');
+  };
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-2 sm:p-6 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
@@ -47,22 +78,48 @@ export default function UserDashboardModal() {
         {/* Header */}
         <div className="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3.5">
-            <img
-              src={userProfile.avatar}
-              alt={userProfile.name}
-              className="w-14 h-14 rounded-2xl object-cover ring-2 ring-brand-500 shadow-md"
-            />
+            <div className="relative">
+              <img
+                src={userProfile.avatar}
+                alt={userProfile.name}
+                className="w-14 h-14 rounded-2xl object-cover ring-2 ring-brand-500 shadow-md bg-slate-800"
+                onError={(e) => {
+                  e.target.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80';
+                }}
+              />
+              {userProfile.emailVerified && (
+                <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center ring-2 ring-white dark:ring-slate-900 shadow" title="Email Verified Account">
+                  <Check className="w-3 h-3 stroke-[3]" />
+                </div>
+              )}
+            </div>
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <h2 className="text-xl font-black text-slate-900 dark:text-white">
                   {userProfile.name}
                 </h2>
                 <span className="px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-500 font-extrabold text-[11px] border border-amber-500/20">
                   {userProfile.tier}
                 </span>
-                <span className="text-xs">🇧🇩</span>
+
+                {/* Email Verification Status Badge */}
+                {userProfile.emailVerified ? (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-extrabold text-[10px] border border-emerald-500/30">
+                    <CheckCircle className="w-3 h-3 text-emerald-500" />
+                    <span>Verified with Email</span>
+                  </span>
+                ) : (
+                  <button
+                    onClick={() => setActiveTab('verification')}
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/15 hover:bg-amber-500/25 text-amber-600 dark:text-amber-400 font-extrabold text-[10px] border border-amber-500/30 transition-all active:scale-95 animate-pulse"
+                    title="Click to Verify Email"
+                  >
+                    <Mail className="w-3 h-3" />
+                    <span>Verify with Mail</span>
+                  </button>
+                )}
               </div>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 mt-0.5">
                 {userProfile.email} · {userProfile.phone} · {userProfile.address.area}, Dhaka
               </p>
             </div>
@@ -71,16 +128,17 @@ export default function UserDashboardModal() {
           <button
             onClick={() => setIsAccountOpen(false)}
             className="w-9 h-9 rounded-full glass border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-400 hover:text-slate-800 dark:hover:text-white"
+            aria-label="Close Account Modal"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex border-b border-slate-200 dark:border-slate-800 px-6 text-xs font-bold gap-6 bg-slate-100/50 dark:bg-slate-900/50">
+        <div className="flex border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 text-xs font-bold gap-4 sm:gap-6 bg-slate-100/50 dark:bg-slate-900/50 overflow-x-auto no-scrollbar">
           <button
             onClick={() => setActiveTab('tracking')}
-            className={`py-3.5 border-b-2 flex items-center gap-1.5 transition-colors ${
+            className={`py-3.5 border-b-2 flex items-center gap-1.5 transition-colors whitespace-nowrap ${
               activeTab === 'tracking'
                 ? 'border-brand-500 text-brand-600 dark:text-brand-400'
                 : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white'
@@ -91,20 +149,37 @@ export default function UserDashboardModal() {
           </button>
 
           <button
+            onClick={() => setActiveTab('verification')}
+            className={`py-3.5 border-b-2 flex items-center gap-1.5 transition-colors whitespace-nowrap ${
+              activeTab === 'verification'
+                ? 'border-brand-500 text-brand-600 dark:text-brand-400'
+                : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white'
+            }`}
+          >
+            <Mail className="w-4 h-4" />
+            <span>Email Verification</span>
+            {userProfile.emailVerified ? (
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+            ) : (
+              <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
+            )}
+          </button>
+
+          <button
             onClick={() => setActiveTab('transactions')}
-            className={`py-3.5 border-b-2 flex items-center gap-1.5 transition-colors ${
+            className={`py-3.5 border-b-2 flex items-center gap-1.5 transition-colors whitespace-nowrap ${
               activeTab === 'transactions'
                 ? 'border-brand-500 text-brand-600 dark:text-brand-400'
                 : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white'
             }`}
           >
             <FileText className="w-4 h-4" />
-            <span>Transaction History ({userProfile.pastTransactions?.length || 2})</span>
+            <span>Transaction History</span>
           </button>
 
           <button
             onClick={() => setActiveTab('security')}
-            className={`py-3.5 border-b-2 flex items-center gap-1.5 transition-colors ${
+            className={`py-3.5 border-b-2 flex items-center gap-1.5 transition-colors whitespace-nowrap ${
               activeTab === 'security'
                 ? 'border-brand-500 text-brand-600 dark:text-brand-400'
                 : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white'
@@ -116,7 +191,7 @@ export default function UserDashboardModal() {
         </div>
 
         {/* Content Body */}
-        <div className="p-6 overflow-y-auto space-y-6 max-h-[70vh]">
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-6 max-h-[70vh]">
           {/* TAB 1: TRACKING */}
           {activeTab === 'tracking' && (
             <div className="space-y-6">
@@ -143,7 +218,7 @@ export default function UserDashboardModal() {
               </div>
 
               {/* INTERACTIVE 5-STEP LIVE PACKAGE TRACKER */}
-              <div className="p-6 rounded-2xl glass border border-slate-200 dark:border-slate-800 space-y-5">
+              <div className="p-4 sm:p-6 rounded-2xl glass border border-slate-200 dark:border-slate-800 space-y-5">
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/60 dark:border-slate-800/80 pb-4">
                   <div>
                     <div className="flex items-center gap-2 font-bold text-slate-900 dark:text-white text-sm">
@@ -190,11 +265,11 @@ export default function UserDashboardModal() {
                             {isDone ? <CheckCircle className="w-4 h-4" /> : idx + 1}
                           </div>
 
-                          <div className="font-bold text-[11px] text-slate-900 dark:text-white mt-2 leading-tight">
+                          <div className="font-bold text-[10px] sm:text-[11px] text-slate-900 dark:text-white mt-2 leading-tight">
                             {s.title}
                           </div>
 
-                          <div className="text-[10px] text-slate-400 mt-0.5 hidden sm:block">
+                          <div className="text-[9px] sm:text-[10px] text-slate-400 mt-0.5 hidden sm:block">
                             {s.time}
                           </div>
                         </div>
@@ -226,7 +301,151 @@ export default function UserDashboardModal() {
             </div>
           )}
 
-          {/* TAB 2: TRANSACTION HISTORY */}
+          {/* TAB 2: EMAIL VERIFICATION */}
+          {activeTab === 'verification' && (
+            <div className="space-y-5 text-xs">
+              <div className="p-5 sm:p-6 rounded-2xl glass border border-slate-200 dark:border-slate-800 space-y-4">
+                <div className="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800/80 pb-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-10 h-10 rounded-2xl bg-brand-500/10 text-brand-500 flex items-center justify-center">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                        User Profile Email Verification
+                      </h3>
+                      <p className="text-[11px] text-slate-500">
+                        Official Google Mail Authenticator for Sazim Hasan Pial
+                      </p>
+                    </div>
+                  </div>
+
+                  {userProfile.emailVerified ? (
+                    <span className="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-extrabold text-xs flex items-center gap-1 border border-emerald-500/30">
+                      <CheckCircle className="w-3.5 h-3.5" />
+                      <span>Verified</span>
+                    </span>
+                  ) : (
+                    <span className="px-3 py-1 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 font-extrabold text-xs flex items-center gap-1 border border-amber-500/30">
+                      <Clock className="w-3.5 h-3.5" />
+                      <span>Pending Verification</span>
+                    </span>
+                  )}
+                </div>
+
+                {/* Email Address details */}
+                <div className="p-3.5 rounded-xl bg-slate-100/70 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <div className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">
+                      Registered Email Address
+                    </div>
+                    <div className="text-sm font-mono font-bold text-slate-900 dark:text-white mt-0.5">
+                      {userProfile.email}
+                    </div>
+                  </div>
+
+                  {userProfile.emailVerified && (
+                    <div className="text-right">
+                      <div className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">
+                        Authenticated via Google Workspace
+                      </div>
+                      <div className="text-[10px] text-slate-400">
+                        Verified: {userProfile.emailVerifiedAt || 'Today'}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* If verified already */}
+                {userProfile.emailVerified ? (
+                  <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/25 space-y-3">
+                    <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 font-bold text-xs">
+                      <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                      <span>Account Fully Verified & Certified</span>
+                    </div>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                      Your email address <strong>{userProfile.email}</strong> has been authenticated with 256-bit cryptographically secured token credentials. You now enjoy priority VIP fulfillment, instant automated Mushak-6.3 invoices, and seamless 1-click checkout.
+                    </p>
+                    <button
+                      onClick={() => handleSendCode()}
+                      className="text-xs text-brand-600 dark:text-brand-400 hover:underline font-semibold"
+                    >
+                      Need to test verification again? Click to re-send OTP code.
+                    </button>
+                  </div>
+                ) : (
+                  /* If not verified */
+                  <div className="space-y-4 pt-1">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                      Protect your orders and verify your ownership of <strong>{userProfile.email}</strong> to activate 2FA security and Platinum VIP benefits.
+                    </p>
+
+                    {!codeSent ? (
+                      <button
+                        onClick={handleSendCode}
+                        className="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-brand-500/25 active:scale-95 transition-all"
+                      >
+                        <Send className="w-3.5 h-3.5" />
+                        <span>Send 6-Digit Verification Code to {userProfile.email}</span>
+                      </button>
+                    ) : (
+                      <form onSubmit={handleVerify} className="space-y-3 p-4 rounded-xl bg-slate-100/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="font-bold text-slate-800 dark:text-slate-200">
+                            Enter 6-Digit Email Code:
+                          </span>
+                          <button
+                            type="button"
+                            onClick={handleAutoFill}
+                            className="text-brand-600 dark:text-brand-400 font-bold text-[11px] hover:underline flex items-center gap-1"
+                          >
+                            <Sparkles className="w-3 h-3 text-amber-500" />
+                            <span>1-Click Auto Fill (849201)</span>
+                          </button>
+                        </div>
+
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            maxLength={6}
+                            value={verificationCode}
+                            onChange={(e) => setVerificationCode(e.target.value)}
+                            placeholder="Enter 849201"
+                            className="flex-1 py-2.5 px-3 rounded-xl text-center font-mono font-bold text-base tracking-widest bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-900 dark:text-white"
+                          />
+
+                          <button
+                            type="submit"
+                            className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md active:scale-95 transition-all flex items-center gap-1.5"
+                          >
+                            <CheckCircle className="w-4 h-4" />
+                            <span>Confirm & Verify</span>
+                          </button>
+                        </div>
+
+                        <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1">
+                          <span>Demo verification code: <strong className="font-mono text-slate-800 dark:text-slate-200">849201</strong></span>
+                          {resendTimer > 0 ? (
+                            <span>Resend code in {resendTimer}s</span>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={handleSendCode}
+                              className="text-brand-600 dark:text-brand-400 font-bold hover:underline"
+                            >
+                              Resend OTP
+                            </button>
+                          )}
+                        </div>
+                      </form>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* TAB 3: TRANSACTION HISTORY */}
           {activeTab === 'transactions' && (
             <div className="space-y-4 text-xs">
               <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
@@ -280,7 +499,7 @@ export default function UserDashboardModal() {
             </div>
           )}
 
-          {/* TAB 3: SECURITY & 2FA */}
+          {/* TAB 4: SECURITY & 2FA */}
           {activeTab === 'security' && (
             <div className="space-y-4 text-xs">
               <div className="p-4 rounded-2xl glass border border-slate-200 dark:border-slate-800 space-y-3">

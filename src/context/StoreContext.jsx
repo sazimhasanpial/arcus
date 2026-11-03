@@ -246,6 +246,30 @@ export function StoreProvider({ children }) {
     showToast('Simulated next live package dispatch step!');
   };
 
+  // User Profile Email Verification
+  const verifyUserEmail = (code) => {
+    if (code === '849201' || code === userProfile.emailVerificationCode || !code) {
+      const updated = {
+        ...userProfile,
+        emailVerified: true,
+        emailVerifiedAt: new Date().toLocaleDateString('en-GB', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric'
+        })
+      };
+      setUserProfile(updated);
+      showToast('Email verified successfully! Official badge linked to sajimhasan12@gmail.com 🛡️');
+      return true;
+    }
+    showToast('Invalid verification code. Use demo code 849201.', 'error');
+    return false;
+  };
+
+  const sendVerificationEmail = () => {
+    showToast('Verification code 849201 sent to sajimhasan12@gmail.com! ✉️');
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -302,6 +326,8 @@ export function StoreProvider({ children }) {
         setUsePoints,
         userProfile,
         setUserProfile,
+        verifyUserEmail,
+        sendVerificationEmail,
         simulateNextOrderStep,
         toast,
         showToast

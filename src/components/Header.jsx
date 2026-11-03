@@ -488,11 +488,19 @@ export default function Header() {
                     {userProfile.tier}
                   </div>
                 </div>
-                <img
-                  src={userProfile.avatar}
-                  alt={userProfile.name}
-                  className="w-7 h-7 rounded-full object-cover ring-2 ring-brand-500/60"
-                />
+                <div className="relative">
+                  <img
+                    src={userProfile.avatar}
+                    alt={userProfile.name}
+                    className="w-7 h-7 rounded-full object-cover ring-2 ring-brand-500/60 bg-slate-800"
+                    onError={(e) => {
+                      e.target.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80';
+                    }}
+                  />
+                  {userProfile.emailVerified && (
+                    <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-1 ring-white dark:ring-slate-900" title="Verified Account" />
+                  )}
+                </div>
               </button>
             </div>
           </div>

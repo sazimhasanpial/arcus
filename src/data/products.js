@@ -454,9 +454,12 @@ export const PROMO_CODES = {
 export const INITIAL_USER_PROFILE = {
   name: 'Sazim Hasan Pial',
   email: 'sajimhasan12@gmail.com',
+  emailVerified: false,
+  emailVerifiedAt: null,
+  emailVerificationCode: '849201',
   tier: 'Platinum VIP',
   points: 2450,
-  avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+  avatar: 'https://github.com/sazimhasanpial.png',
   phone: '+880 1712-345678',
   address: {
     street: 'House 42, Road 11, Block D',
