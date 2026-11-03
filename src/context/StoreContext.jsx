@@ -11,8 +11,8 @@ export function StoreProvider({ children }) {
     return saved !== null ? JSON.parse(saved) : true; // Default to sleek dark mode
   });
 
-  // Currency
-  const [currency, setCurrency] = useState(() => localStorage.getItem('arcus_currency') || 'USD');
+  // Currency (Default to Bangladeshi Taka BDT)
+  const [currency, setCurrency] = useState(() => localStorage.getItem('arcus_currency') || 'BDT');
 
   // Search & Filtering
   const [searchQuery, setSearchQuery] = useState('');
@@ -105,12 +105,12 @@ export function StoreProvider({ children }) {
     }, 3200);
   };
 
-  // Currency Converter helper
+  // Currency Converter helper (Defaults to authentic BDT Taka formatting)
   const formatPrice = (usdAmount) => {
-    const curr = CURRENCIES[currency] || CURRENCIES.USD;
+    const curr = CURRENCIES[currency] || CURRENCIES.BDT;
     const converted = usdAmount * curr.rate;
     if (currency === 'BDT') {
-      return `${curr.symbol}${Math.round(converted).toLocaleString()}`;
+      return `৳ ${Math.round(converted).toLocaleString('en-IN')}`;
     }
     return `${curr.symbol}${converted.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`;
   };

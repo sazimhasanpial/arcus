@@ -440,8 +440,8 @@ export const THEMES = [
 ];
 
 export const CURRENCIES = {
+  BDT: { symbol: '৳', rate: 121.5, label: 'BDT (৳ Taka)', country: 'BD' },
   USD: { symbol: '$', rate: 1, label: 'USD ($)', country: 'US' },
-  BDT: { symbol: '৳', rate: 121.5, label: 'BDT (৳)', country: 'BD' },
   EUR: { symbol: '€', rate: 0.92, label: 'EUR (€)', country: 'EU' },
   GBP: { symbol: '£', rate: 0.79, label: 'GBP (£)', country: 'GB' }
 };

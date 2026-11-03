@@ -253,14 +253,14 @@ export default function QuickViewModal() {
                   className="flex-1 py-3 px-4 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-brand-500/25 transition-all"
                 >
                   <ShoppingCart className="w-4 h-4" />
-                  <span>Add to Cart</span>
+                  <span>কার্টে যোগ করুন • Add to Cart</span>
                 </button>
 
                 <button
                   onClick={handleBuyNow}
                   className="py-3 px-5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs sm:text-sm shadow-lg shadow-amber-500/25 transition-all"
                 >
-                  Buy Now
+                  কিনুন • Buy Now
                 </button>
               </div>
 

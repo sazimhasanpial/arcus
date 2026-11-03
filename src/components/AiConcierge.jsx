@@ -28,7 +28,7 @@ export default function AiConcierge() {
     {
       id: 1,
       sender: 'bot',
-      text: `Hello ${userProfile.name.split(' ')[0]}! I'm Arcus AI, your personal shopping concierge. How can I assist you with modern tech, acoustics, or delivery today?`,
+      text: `নমস্কার / Assalamu Alaikum ${userProfile.name.split(' ')[0]}! I'm Arcus AI, your Bangladesh shopping concierge. How can I assist you with modern tech, acoustics, bKash payments, or Pathao express delivery today?`,
       time: 'Just now'
     }
   ]);
@@ -75,7 +75,7 @@ export default function AiConcierge() {
         botResponse = {
           id: Date.now() + 1,
           sender: 'bot',
-          text: `For acoustic perfection, our flagship is the **${audioProduct.name}** ($${audioProduct.price}). It features custom 40mm beryllium drivers, active 45dB spatial ANC, and 60 hours battery!`,
+          text: `For acoustic perfection in Bangladesh, our flagship is the **${audioProduct.name}** (${formatPrice(audioProduct.price)}). It features custom 40mm beryllium drivers, active 45dB spatial ANC, and 60 hours battery!`,
           productLink: audioProduct,
           time: 'Just now'
         };
@@ -102,7 +102,7 @@ export default function AiConcierge() {
         botResponse = {
           id: Date.now() + 1,
           sender: 'bot',
-          text: `You'll love the **${watch.name}** ($${watch.price})—precision-machined from Grade 5 aerospace titanium with sapphire AMOLED glass and 14-day battery life.`,
+          text: `You'll love the **${watch.name}** (${formatPrice(watch.price)})—precision-machined from Grade 5 aerospace titanium with sapphire AMOLED glass and 14-day battery life.`,
           productLink: watch,
           time: 'Just now'
         };

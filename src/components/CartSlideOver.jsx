@@ -323,7 +323,7 @@ export default function CartSlideOver() {
                 onClick={handleProceedCheckout}
                 className="w-full py-3.5 px-4 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-xl shadow-brand-500/25 active:scale-95 transition-all"
               >
-                <span>Proceed to Checkout</span>
+                <span>অর্ডার সম্পন্ন করুন • Proceed to Checkout</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
