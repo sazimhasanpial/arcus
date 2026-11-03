@@ -13,7 +13,8 @@ import {
   X,
   Menu,
   ShieldCheck,
-  Sparkles
+  Sparkles,
+  MapPin
 } from 'lucide-react';
 
 export default function Header() {
@@ -79,11 +80,19 @@ export default function Header() {
               <span className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-brand-600 to-slate-900 dark:from-white dark:via-brand-400 dark:to-white bg-clip-text text-transparent">
                 ARCUS
               </span>
-              <span className="block text-[10px] uppercase font-bold tracking-widest text-brand-600 dark:text-brand-400 -mt-1">
-                E-Commerce
-              </span>
+              <div className="flex items-center gap-1 -mt-1">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-brand-600 dark:text-brand-400">
+                  Bangladesh
+                </span>
+                <span className="text-[10px]">🇧🇩</span>
+              </div>
             </div>
           </a>
+
+          <div className="hidden lg:flex items-center gap-1 px-2.5 py-1 rounded-xl glass border border-slate-200/60 dark:border-slate-800 text-[11px] text-slate-500">
+            <MapPin className="w-3 h-3 text-emerald-500" />
+            <span>Banani, Dhaka</span>
+          </div>
         </div>
 
         {/* Live Search Bar */}

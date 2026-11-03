@@ -2,6 +2,7 @@ import React from 'react';
 import { StoreProvider } from './context/StoreContext';
 import FlashBanner from './components/FlashBanner';
 import Header from './components/Header';
+import SecurityBadgeBar from './components/SecurityBadgeBar';
 import HeroBanner from './components/HeroBanner';
 import ProductGrid from './components/ProductGrid';
 import Footer from './components/Footer';
@@ -23,6 +24,9 @@ export default function App() {
 
         {/* Sticky Modern Header */}
         <Header />
+
+        {/* Bangladesh Security & Compliance Trust Bar */}
+        <SecurityBadgeBar />
 
         {/* Hero Section */}
         <main className="flex-1">

@@ -187,11 +187,15 @@ export default function Footer() {
                 Google Pay
               </span>
               <span className="px-2.5 py-1 rounded-lg bg-purple-500/10 text-purple-600 border border-purple-500/20">
-                4-Pay BNPL
+                DBBL Rocket
+              </span>
+              <span className="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+                Cash on Delivery (COD)
               </span>
             </div>
             <p className="text-[11px] text-slate-500 pt-2 leading-relaxed">
-              All transactions encrypted via TLS 1.3 with bank-grade 3D Secure fraud prevention.
+              Govt. DBID: <strong>DBID-28491024</strong> · BIN: <strong>004829104-0101</strong><br />
+              Head Office: Level 8, Arcus Tower, Road 11, Banani, Dhaka-1213
             </p>
           </div>
         </div>
@@ -199,7 +203,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 mt-8 border-t border-slate-200/60 dark:border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
-            © {new Date().getFullYear()} Arcus Store Inc. All rights reserved.
+            © {new Date().getFullYear()} Arcus Bangladesh Ltd. e-CAB Member #1489. All rights reserved.
           </div>
           <div className="flex items-center gap-1 text-[11px]">
             <span>Engineered with modern React & Tailwind CSS for</span>

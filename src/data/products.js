@@ -459,13 +459,40 @@ export const INITIAL_USER_PROFILE = {
   avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
   phone: '+880 1712-345678',
   address: {
-    street: 'House 42, Road 11, Banani',
+    street: 'House 42, Road 11, Block D',
+    area: 'Banani',
     city: 'Dhaka',
+    district: 'Dhaka',
     country: 'Bangladesh',
     zip: '1213'
   },
   savedCards: [
-    { id: 'c1', type: 'Visa Platinum', last4: '8824', exp: '08/28' }
+    { id: 'c1', type: 'City Bank AMEX Platinum', last4: '8824', exp: '08/28' },
+    { id: 'c2', type: 'BRAC Bank Visa Signature', last4: '4190', exp: '11/27' }
+  ],
+  savedMfs: [
+    { type: 'bKash', number: '01712-345678', verified: true },
+    { type: 'Nagad', number: '01712-345678', verified: true }
+  ],
+  pastTransactions: [
+    {
+      trxId: 'BKS-9281740921',
+      date: '02 Nov 2026, 04:15 PM',
+      method: 'bKash Merchant Pay',
+      amountBDT: '৳ 22,960',
+      status: 'Secured & Completed',
+      merchantTrx: 'ARC-MFS-8491',
+      securityCheck: '100% Passed · 2FA SMS Verified'
+    },
+    {
+      trxId: 'EBL-4820194821',
+      date: '28 Oct 2026, 01:22 PM',
+      method: 'EBL Visa 3D Secure',
+      amountBDT: '৳ 60,620',
+      status: 'Settled & Verified',
+      merchantTrx: 'ARC-CARD-9912',
+      securityCheck: 'Verified by Visa 3DS 2.0'
+    }
   ],
   currentOrder: {
     id: 'ARC-98241',
@@ -473,14 +500,15 @@ export const INITIAL_USER_PROFILE = {
     itemsCount: 2,
     total: 488,
     statusStep: 2, // 0: Placed, 1: Processed, 2: Shipped, 3: Out for Delivery, 4: Delivered
-    carrier: 'DHL Express Global / RedX Banani Hub',
-    trackingNumber: 'ARC-DH-90182740-BD',
+    carrier: 'Pathao Express Priority / Banani Hub',
+    rider: 'Tanvir Hossain (Rider ID: #PTH-4821, Contact: +880 1819-284910)',
+    trackingNumber: 'PTH-BD-90182740-DH',
     steps: [
-      { title: 'Order Verified', desc: 'Payment secured and warehouse notified', time: '09:45 AM', done: true },
-      { title: 'Quality Check & Packed', desc: 'Sealed in tamper-proof sustainable packaging', time: '10:15 AM', done: true },
-      { title: 'Shipped & In Transit', desc: 'Dispatched from Central Air Cargo Terminal', time: '10:40 AM', done: true },
-      { title: 'Out for Delivery', desc: 'Courier courier assigned to local delivery vehicle', time: 'Expected 02:30 PM', done: false },
-      { title: 'Delivered', desc: 'Contactless handover with signature verification', time: 'Expected 03:15 PM', done: false }
+      { title: 'Order Verified & Security Cleared', desc: 'bKash / 3DS payment token validated via SSLCommerz gateway', time: '09:45 AM', done: true },
+      { title: 'Barcoded & Quality Sealed', desc: 'Tamper-evident DBID packaging sealed at Banani Fulfillment Center', time: '10:15 AM', done: true },
+      { title: 'Dispatched with Pathao Courier', desc: 'Handed over to Pathao Express Priority Van (Rider assigned)', time: '10:40 AM', done: true },
+      { title: 'Out for Doorstep Handover', desc: 'Rider approaching Banani Road 11 with mobile POS terminal', time: 'Expected 02:30 PM', done: false },
+      { title: 'Delivered & OTP Signed', desc: 'Customer digital signature & OTP handover completion', time: 'Expected 03:15 PM', done: false }
     ]
   }
 };
