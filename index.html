@@ -10,12 +10,12 @@
   <!-- Open Graph / Meta -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="NextGenDev™ Studio | By Sazim Hasan Pial" />
-  <meta property="og:description" content="Human-crafted custom software & website engineering. Instant specs, smart co-pilot, printable A4 quotations, and direct WhatsApp hotline (+880 1729-962141)." />
+  <meta property="og:description" content="Human-crafted custom software & website engineering. Compact first-screen, smart co-pilot, printable A4 quotations, and direct WhatsApp hotline (+880 1729-962141)." />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='16 18 22 12 16 6'></polyline><polyline points='8 6 2 12 8 18'></polyline></svg>" />
+  <!-- Favicon: High-Tech Architectural SVG Logo Mark -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 2 7 12 12 22 7 12 2'></polygon><polyline points='2 17 12 22 22 17'></polyline><polyline points='2 12 12 17 22 12'></polyline></svg>" />
 
-  <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono -->
+  <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono, Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
@@ -74,31 +74,101 @@
       font-family: inherit;
     }
 
-    /* Safe-Area Inset Handling */
-    .safe-top {
-      padding-top: max(1rem, env(safe-area-inset-top));
-    }
-    .safe-bottom {
-      padding-bottom: max(1rem, env(safe-area-inset-bottom));
-    }
-    .safe-nav-pad {
-      padding-top: calc(4.5rem + env(safe-area-inset-top));
-    }
-
-    /* Fluid Studio Container */
+    /* Fluid Studio Container with Dense Compact Padding */
     .studio-container {
-      width: min(100% - clamp(1.5rem, 5vw, 4rem), 1360px);
+      width: min(100% - clamp(1.25rem, 4vw, 3.5rem), 1360px);
       margin-inline: auto;
     }
 
     /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: var(--bg-surface); }
     ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
     /* ==========================================================================
-       2. RAW ARCHITECTURAL MULTI-THEME ENGINE
+       2. INTERACTIVE CURSOR TOOLTIP ENGINE (Says what buttons do on cursor hover)
+       ========================================================================== */
+    [data-tooltip] {
+      position: relative;
+    }
+    [data-tooltip]::before {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 7px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: #0b0f19;
+      color: #f1f5f9;
+      border: 1px solid #3b82f6;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      z-index: 100;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+    }
+    [data-tooltip]::after {
+      content: '';
+      position: absolute;
+      bottom: calc(100% + 2px);
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px 5px 0 5px;
+      border-style: solid;
+      border-color: #3b82f6 transparent transparent transparent;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.15s ease;
+      z-index: 100;
+    }
+    [data-tooltip]:hover::before,
+    [data-tooltip]:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Tooltip positioned on bottom for header elements */
+    [data-tooltip-pos="bottom"]::before {
+      bottom: auto;
+      top: calc(100% + 7px);
+      transform: translateX(-50%) translateY(-4px);
+    }
+    [data-tooltip-pos="bottom"]::after {
+      bottom: auto;
+      top: calc(100% + 2px);
+      border-width: 0 5px 5px 5px;
+      border-color: transparent transparent #3b82f6 transparent;
+    }
+    [data-tooltip-pos="bottom"]:hover::before,
+    [data-tooltip-pos="bottom"]:hover::after {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Tactile Clickable Button System (High Visual Affordance) */
+    .tactile-btn {
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.18s ease, filter 0.18s ease;
+    }
+    .tactile-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+    .tactile-btn:active {
+      transform: translateY(1px);
+      filter: brightness(0.95);
+    }
+
+    /* ==========================================================================
+       3. RAW ARCHITECTURAL MULTI-THEME ENGINE
        ========================================================================== */
     :root, [data-theme="obsidian"] {
       --bg-surface: #050608;
@@ -160,7 +230,7 @@
       --accent-hover: #eab308;
       --accent-badge-bg: #facc15;
       --accent-badge-text: #000000;
-      --shadow-style: 4px 4px 0px #facc15;
+      --shadow-style: 3px 3px 0px #facc15;
       --font-heading: 'Space Grotesk', sans-serif;
     }
 
@@ -199,14 +269,14 @@
     body {
       background-color: var(--bg-surface);
       color: var(--ink-primary);
-      transition: background-color 0.25s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease;
+      transition: background-color 0.2s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s ease;
     }
 
     .studio-card {
       background-color: var(--bg-card);
       border: 1px solid var(--border-color);
       box-shadow: var(--shadow-style);
-      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease;
+      transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease;
     }
 
     .studio-card-subtle {
@@ -214,16 +284,17 @@
       border: 1px solid var(--border-color);
     }
 
+    /* Compact, High-Density Fluid Typography */
     .fluid-h1 {
-      font-size: clamp(2rem, 4.5vw, 3.75rem);
+      font-size: clamp(1.85rem, 3.8vw, 3.25rem);
       font-weight: 800;
       letter-spacing: -0.035em;
-      line-height: 1.08;
+      line-height: 1.1;
       font-family: var(--font-heading);
     }
 
     .fluid-h2 {
-      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-size: clamp(1.35rem, 2.5vw, 1.95rem);
       font-weight: 700;
       letter-spacing: -0.025em;
       line-height: 1.2;
@@ -231,10 +302,10 @@
     }
 
     .fluid-h3 {
-      font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+      font-size: clamp(1.05rem, 1.3vw, 1.2rem);
       font-weight: 600;
       letter-spacing: -0.015em;
-      line-height: 1.3;
+      line-height: 1.25;
       font-family: var(--font-heading);
     }
 
@@ -286,74 +357,81 @@
   </style>
 </head>
 
-<body data-theme="obsidian" class="font-sans antialiased text-[0.95rem] pb-24 lg:pb-12">
+<body data-theme="obsidian" class="font-sans antialiased text-[0.93rem] pb-20 lg:pb-10">
 
   <!-- ==========================================================================
-       NAVBAR: FLUID GLASSMORPHIC HEADER WITH CLIENT PORTAL & PIN ADMIN ACCESS
+       NAVBAR: COMPACT HEADER WITH STANDOUT LOGO & DIRECT TOOLTIPS
        ========================================================================== -->
   <header class="fixed top-0 inset-x-0 z-40 border-b backdrop-blur-xl transition-colors duration-200" style="background-color: var(--bg-card); border-color: var(--border-color); padding-top: env(safe-area-inset-top);">
-    <div class="studio-container h-16 flex items-center justify-between">
+    <div class="studio-container h-14 flex items-center justify-between">
       
-      <!-- Brand Attribution -->
-      <a href="#" class="flex items-center gap-3 group focus:outline-none">
-        <div class="w-9 h-9 rounded-lg flex items-center justify-center font-mono font-bold text-sm tracking-tighter" style="background-color: var(--accent); color: #ffffff;">
-          &lt;NG/&gt;
+      <!-- STANDOUT MODERN LOGO & STUDIO ATTRIBUTION -->
+      <a href="#" class="flex items-center gap-2.5 group focus:outline-none" data-tooltip="NextGenDev™ Studio Homepage" data-tooltip-pos="bottom" title="NextGenDev™ Studio Homepage">
+        <!-- World-Class Geometric Diamond Emblem Logo -->
+        <div class="relative w-9 h-9 rounded-xl p-[1.5px] bg-gradient-to-tr from-indigo-500 via-purple-500 to-emerald-400 group-hover:scale-105 transition-transform duration-200 shadow-md">
+          <div class="w-full h-full rounded-[10px] bg-[#07090e] flex items-center justify-center relative overflow-hidden">
+            <svg class="w-4 h-4 text-indigo-400 group-hover:text-emerald-400 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
         </div>
         <div>
-          <div class="flex items-center gap-2">
-            <span class="font-heading font-bold text-base tracking-tight" style="color: var(--ink-primary);">NextGenDev™</span>
-            <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono font-semibold" style="background-color: var(--accent-badge-bg); color: var(--accent-badge-text);">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Studio Live
+          <div class="flex items-center gap-1.5">
+            <span class="font-heading font-bold text-sm tracking-tight text-white group-hover:text-indigo-400 transition-colors">NextGenDev™</span>
+            <span class="px-1.5 py-0.2 rounded text-[9px] font-mono font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Online
             </span>
           </div>
-          <div class="text-[9.5px] font-mono tracking-[0.2em] uppercase font-semibold text-slate-400">
+          <div class="text-[9px] font-mono tracking-[0.18em] uppercase font-semibold text-slate-400">
             BY SAZIM HASAN PIAL
           </div>
         </div>
       </a>
 
       <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-6 text-xs font-mono font-medium text-slate-400">
-        <a href="#architectures" class="hover:text-white transition-colors">Architectures</a>
-        <a href="#themelab" class="hover:text-white transition-colors">Theme Lab</a>
-        <a href="#configurator" class="hover:text-white transition-colors">Configurator</a>
-        <a href="#slaguarantee" class="hover:text-white transition-colors">SLA & Terms</a>
+      <nav class="hidden md:flex items-center gap-5 text-xs font-mono font-medium text-slate-400">
+        <a href="#architectures" class="hover:text-white transition-colors" data-tooltip="Browse 6 Website Blueprints" data-tooltip-pos="bottom" title="Browse 6 Website Blueprints">Architectures</a>
+        <a href="#themelab" class="hover:text-white transition-colors" data-tooltip="Test 6 Live Aesthetics" data-tooltip-pos="bottom" title="Test 6 Live Aesthetics">Theme Lab</a>
+        <a href="#configurator" class="hover:text-white transition-colors" data-tooltip="Customize Specs & Pricing" data-tooltip-pos="bottom" title="Customize Specs & Pricing">Configurator</a>
+        <a href="#slaguarantee" class="hover:text-white transition-colors" data-tooltip="View SLA & Milestones" data-tooltip-pos="bottom" title="View SLA & Milestones">SLA & Terms</a>
       </nav>
 
-      <!-- Desktop Actions -->
-      <div class="hidden lg:flex items-center gap-2.5">
+      <!-- Desktop Actions with Direct Hover Tooltips -->
+      <div class="hidden lg:flex items-center gap-2">
         <!-- Client Portal Button -->
-        <button onclick="openClientPortalModal()" class="px-3 py-1.5 rounded-lg text-xs font-mono font-medium border flex items-center gap-1.5 hover:bg-slate-800 transition-colors" style="border-color: var(--border-color); color: var(--ink-primary);" title="Check Project Status & Download Invoices">
+        <button onclick="openClientPortalModal()" class="tactile-btn px-2.5 py-1.5 rounded-lg text-xs font-mono font-medium border flex items-center gap-1.5 hover:bg-slate-800 transition-colors" style="border-color: var(--border-color); color: var(--ink-primary);" data-tooltip="Track Live Project & Download PDFs" data-tooltip-pos="bottom" title="Track Live Project & Download PDFs">
           <i data-lucide="folder-lock" class="w-3.5 h-3.5 text-indigo-400"></i>
           <span>Client Portal</span>
         </button>
 
         <!-- Admin Lock Button (PIN: 2500) -->
-        <button onclick="handleAdminLoginPrompt()" class="p-2 rounded-lg text-xs border hover:bg-slate-800 transition-colors" style="border-color: var(--border-color); color: var(--ink-muted);" title="Sazim Admin Console (PIN: 2500)">
+        <button onclick="handleAdminLoginPrompt()" class="tactile-btn p-1.5 rounded-lg text-xs border hover:bg-slate-800 transition-colors" style="border-color: var(--border-color); color: var(--ink-muted);" data-tooltip="Sazim Admin Console (PIN: 2500)" data-tooltip-pos="bottom" title="Sazim Admin Console (PIN: 2500)">
           <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-400"></i>
         </button>
 
         <!-- WhatsApp Hotline -->
-        <a href="https://wa.me/8801729962141" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5 hover:bg-emerald-500/20 transition-all">
+        <a href="https://wa.me/8801729962141" target="_blank" rel="noopener noreferrer" class="tactile-btn px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/40 flex items-center gap-1.5 hover:bg-emerald-500/25 transition-all" data-tooltip="WhatsApp Hotline: +880 1729-962141" data-tooltip-pos="bottom" title="WhatsApp Hotline: +880 1729-962141">
           <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
           <span>+880 1729-962141</span>
         </a>
 
-        <!-- Primary CTA -->
-        <a href="#configurator" class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold text-white shadow-md flex items-center gap-1 hover:brightness-110 transition-all" style="background-color: var(--accent);">
+        <!-- Primary CTA: Configure Build -->
+        <a href="#configurator" class="tactile-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold text-white shadow-md flex items-center gap-1 hover:brightness-110 transition-all" style="background-color: var(--accent);" data-tooltip="Launch 30-Second Configurator" data-tooltip-pos="bottom" title="Launch 30-Second Configurator">
           <span>Configure Build</span>
           <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
         </a>
       </div>
 
       <!-- Mobile Top Bar Actions -->
-      <div class="flex items-center gap-2 lg:hidden">
-        <button onclick="openClientPortalModal()" class="px-2.5 py-1.5 rounded-lg text-xs font-mono border flex items-center gap-1" style="border-color: var(--border-color); color: var(--ink-primary);">
-          <i data-lucide="folder-open" class="w-3.5 h-3.5 text-indigo-400"></i>
+      <div class="flex items-center gap-1.5 lg:hidden">
+        <button onclick="openClientPortalModal()" class="tactile-btn px-2 py-1 rounded-lg text-xs font-mono border flex items-center gap-1" style="border-color: var(--border-color); color: var(--ink-primary);" data-tooltip="Client Portal" title="Client Portal">
+          <i data-lucide="folder-open" class="w-3 h-3 text-indigo-400"></i>
           <span>Portal</span>
         </button>
-        <button onclick="handleAdminLoginPrompt()" class="p-1.5 rounded-lg text-xs border" style="border-color: var(--border-color); color: var(--ink-muted);">
-          <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-400"></i>
+        <button onclick="handleAdminLoginPrompt()" class="tactile-btn p-1.5 rounded-lg text-xs border" style="border-color: var(--border-color); color: var(--ink-muted);" data-tooltip="Admin PIN (2500)" title="Admin PIN (2500)">
+          <i data-lucide="lock" class="w-3 h-3 text-amber-400"></i>
         </button>
       </div>
 
@@ -361,89 +439,103 @@
   </header>
 
   <!-- Navigation Spacing Clearance -->
-  <div class="safe-nav-pad"></div>
+  <div class="pt-14"></div>
 
   <!-- ==========================================================================
-       HERO SECTION: SWISS ENGINEERING GRID & DIRECT SPECIFICATION ENGINE
+       HERO: COMPACT, HIGH-DENSITY FIRST SCREEN (ALL ESSENTIALS ABOVE THE FOLD)
        ========================================================================== -->
-  <section class="py-12 md:py-20 border-b" style="border-color: var(--border-color);">
-    <div class="studio-container space-y-10">
+  <section class="py-6 md:py-10 border-b relative" style="border-color: var(--border-color);">
+    <div class="studio-container space-y-6">
       
-      <!-- Top Credentials Pill -->
-      <div class="flex flex-wrap items-center gap-3">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono border" style="background-color: var(--bg-card); border-color: var(--border-color); color: var(--ink-muted);">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          <span>Lead Engineer: <strong>Sazim Hasan Pial</strong></span>
+      <!-- Top Credentials Bar with Important Highlights -->
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono border studio-card" data-tooltip="Lead Engineer: Sazim Hasan Pial (CSE @ AIUB)" title="Lead Engineer: Sazim Hasan Pial (CSE @ AIUB)">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Lead Engineer: <strong class="text-white">Sazim Hasan Pial</strong></span>
           <span class="text-slate-600">|</span>
           <span class="text-indigo-400">CSE @ AIUB</span>
         </div>
-        <div class="text-[11px] font-mono text-slate-500">
-          Dhaka, Bangladesh · Direct Client Execution
+        
+        <div class="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-400">
+          <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold" data-tooltip="50% Advance on Spec Freeze, 50% on Handover" title="50% Advance on Spec Freeze, 50% on Handover">
+            ✓ 50/50 Milestones
+          </span>
+          <span class="px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 font-semibold" data-tooltip="Immediate Free Fixes for 30 Days Post-Launch" title="Immediate Free Fixes for 30 Days Post-Launch">
+            ✓ 30-Day Bug Warranty
+          </span>
+          <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 font-semibold" data-tooltip="Zero Bloated Templates, 100% Handcrafted Code" title="Zero Bloated Templates, 100% Handcrafted Code">
+            ✓ 100% Custom Code
+          </span>
         </div>
       </div>
 
-      <!-- Main Headline & Subtitle -->
-      <div class="max-w-4xl space-y-5">
+      <!-- Main Headline & Subtitle (Dense, No Excessive Gaps) -->
+      <div class="max-w-4xl space-y-3">
         <h1 class="fluid-h1 text-white">
           Imagine Your Website. <br />
           <span style="color: var(--accent);">Engineered To Exact Need.</span>
         </h1>
-        <p class="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl">
-          High-performance, zero-bloat web engineering studio. Select your architecture, test visual themes in real time, customize features, and launch your specification directly to Sazim's WhatsApp (<strong class="text-emerald-400 font-mono">+880 1729-962141</strong>).
+        <p class="text-sm sm:text-base text-slate-400 leading-relaxed max-w-2xl">
+          High-performance, zero-bloat web engineering studio. Select your architecture below, customize features, and launch your specification straight to Sazim's WhatsApp (<strong class="text-emerald-400 font-mono">+880 1729-962141</strong>) with real-time price quotation.
         </p>
       </div>
 
-      <!-- Action Suite & Telemetry -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center pt-2">
-        
-        <div class="md:col-span-7 flex flex-wrap items-center gap-3">
-          <a href="#configurator" class="px-5 py-3 rounded-xl font-mono font-bold text-xs text-white shadow-lg flex items-center gap-2 transition-all hover:scale-[1.02]" style="background-color: var(--accent);">
-            <i data-lucide="sliders" class="w-4 h-4"></i>
-            <span>Launch Project Configurator</span>
-          </a>
-          <a href="#themelab" class="px-4 py-3 rounded-xl font-mono text-xs border studio-card flex items-center gap-2 text-slate-300 hover:text-white transition-all">
-            <i data-lucide="palette" class="w-4 h-4 text-indigo-400"></i>
-            <span>Explore Theme Lab</span>
-          </a>
-          <a href="https://wa.me/8801729962141" target="_blank" class="px-4 py-3 rounded-xl font-mono text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 flex items-center gap-2 transition-all">
-            <i data-lucide="phone-call" class="w-4 h-4"></i>
-            <span>Direct WhatsApp</span>
-          </a>
-        </div>
+      <!-- Action Buttons Row (Clear Button Affordance with Hover Labels) -->
+      <div class="flex flex-wrap items-center gap-3 pt-1">
+        <a href="#configurator" class="tactile-btn px-5 py-2.5 rounded-xl font-mono font-bold text-xs text-white shadow-lg flex items-center gap-2 hover:scale-[1.02]" style="background-color: var(--accent);" data-tooltip="Configure pages, gateways & get price quote" title="Configure pages, gateways & get price quote">
+          <i data-lucide="sliders" class="w-4 h-4"></i>
+          <span>Launch Project Configurator</span>
+        </a>
 
-        <!-- Studio Telemetry Grid -->
-        <div class="md:col-span-5 grid grid-cols-2 gap-3">
-          <div class="p-3.5 rounded-xl studio-card space-y-1">
-            <div class="text-xs font-mono text-slate-500 uppercase">Load Performance</div>
-            <div class="text-lg font-mono font-bold text-emerald-400">&lt; 0.4s Cold Load</div>
-            <div class="text-[10px] font-mono text-slate-400">100/100 Core Web Vitals</div>
-          </div>
-          <div class="p-3.5 rounded-xl studio-card space-y-1">
-            <div class="text-xs font-mono text-slate-500 uppercase">Architecture</div>
-            <div class="text-lg font-mono font-bold text-indigo-400">100% Handcrafted</div>
-            <div class="text-[10px] font-mono text-slate-400">No AI-template bloat</div>
-          </div>
-        </div>
+        <a href="#themelab" class="tactile-btn px-4 py-2.5 rounded-xl font-mono text-xs border studio-card flex items-center gap-2 text-slate-300 hover:text-white" data-tooltip="Click to test 6 live aesthetic themes" title="Click to test 6 live aesthetic themes">
+          <i data-lucide="palette" class="w-4 h-4 text-indigo-400"></i>
+          <span>Explore Theme Lab</span>
+        </a>
 
+        <a href="https://wa.me/8801729962141" target="_blank" rel="noopener noreferrer" class="tactile-btn px-4 py-2.5 rounded-xl font-mono text-xs bg-emerald-500/15 text-emerald-400 border border-emerald-500/40 hover:bg-emerald-500/25 flex items-center gap-2" data-tooltip="Chat on WhatsApp (+880 1729-962141)" title="Chat on WhatsApp (+880 1729-962141)">
+          <i data-lucide="phone-call" class="w-4 h-4"></i>
+          <span>Direct WhatsApp</span>
+        </a>
+
+        <button onclick="openClientPortalModal()" class="tactile-btn px-4 py-2.5 rounded-xl font-mono text-xs border studio-card flex items-center gap-2 text-slate-300 hover:text-white" data-tooltip="Login to view active project & documents" title="Login to view active project & documents">
+          <i data-lucide="folder-lock" class="w-4 h-4 text-indigo-400"></i>
+          <span>Client Portal</span>
+        </button>
+      </div>
+
+      <!-- Compact Telemetry Row -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1 text-xs font-mono">
+        <div class="p-2.5 rounded-xl studio-card space-y-0.5">
+          <div class="text-[10px] text-slate-500 uppercase">Speed Score</div>
+          <div class="font-bold text-emerald-400">&lt; 0.4s Cold Load</div>
+        </div>
+        <div class="p-2.5 rounded-xl studio-card space-y-0.5">
+          <div class="text-[10px] text-slate-500 uppercase">Milestones</div>
+          <div class="font-bold text-indigo-400">50% Adv / 50% Handover</div>
+        </div>
+        <div class="p-2.5 rounded-xl studio-card space-y-0.5">
+          <div class="text-[10px] text-slate-500 uppercase">Support SLA</div>
+          <div class="font-bold text-amber-400">30-Day Bug Warranty</div>
+        </div>
+        <div class="p-2.5 rounded-xl studio-card space-y-0.5">
+          <div class="text-[10px] text-slate-500 uppercase">Hotline</div>
+          <div class="font-bold text-emerald-400">+880 1729-962141</div>
+        </div>
       </div>
 
     </div>
   </section>
 
   <!-- ==========================================================================
-       SECTION 1: 6 SERVICE ARCHITECTURES (WITH CRISP SVG WIREFRAMES - NO IMAGES)
+       SECTION 1: 6 ARCHITECTURES (COMPACT CARDS, TIGHT SPACING, WIREFRAMES)
        ========================================================================== -->
-  <section id="architectures" class="py-16 md:py-24 border-b" style="border-color: var(--border-color);">
-    <div class="studio-container space-y-10">
+  <section id="architectures" class="py-10 md:py-14 border-b" style="border-color: var(--border-color);">
+    <div class="studio-container space-y-6">
       
-      <!-- Section Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <div class="space-y-2">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-2">
+        <div class="space-y-1">
           <div class="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold">Service Blueprint Matrix</div>
           <h2 class="fluid-h2 text-white">6 High-Performance Website Architectures</h2>
-          <p class="text-xs sm:text-sm text-slate-400 max-w-xl">
-            Clean architectural blueprints engineered for specific conversion goals. Built with zero external dependencies for maximum loading velocity.
-          </p>
         </div>
         <div class="text-xs font-mono text-slate-400">
           Click any card to pre-select it in your configurator.
@@ -451,39 +543,35 @@
       </div>
 
       <!-- 6 Architecture Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         
         <!-- CARD 1: E-Commerce & Brand Store -->
-        <div class="studio-card rounded-2xl p-6 flex flex-col justify-between space-y-5 hover:border-emerald-500 transition-all cursor-pointer group" onclick="preselectArchitecture('E-Commerce & Online Store', '#10B981')">
-          <div class="space-y-4">
-            <!-- Top Badges & Wireframe -->
+        <div class="studio-card rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-emerald-500 transition-all cursor-pointer group" onclick="preselectArchitecture('Full E-Commerce & Online Store', '#10B981')" data-tooltip="Click to customize E-Commerce Storefront in configurator" title="Click to customize E-Commerce Storefront in configurator">
+          <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded text-[11px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
                 #10B981 · E-COMMERCE
               </span>
-              <span class="text-[11px] font-mono text-slate-500">Retail & Gadgets</span>
+              <span class="text-[10px] font-mono text-slate-500">Retail & Gadgets</span>
             </div>
 
             <!-- Crisp SVG UI Wireframe -->
-            <div class="w-full h-32 rounded-xl bg-slate-950/80 border border-slate-800 p-3 space-y-2 font-mono text-[9px] text-slate-500 select-none">
+            <div class="w-full h-28 rounded-xl bg-slate-950/80 border border-slate-800 p-2.5 space-y-1.5 font-mono text-[9px] text-slate-500 select-none">
               <div class="flex items-center justify-between pb-1 border-b border-slate-800">
                 <span class="text-emerald-400 font-bold">&lt;STOREFRONT/&gt;</span>
                 <span class="text-slate-400">bKash · Nagad · COD</span>
               </div>
-              <div class="grid grid-cols-3 gap-1.5 pt-1">
-                <div class="bg-slate-900 border border-slate-800 rounded p-1.5 space-y-1">
-                  <div class="h-8 bg-slate-800 rounded"></div>
-                  <div class="h-2 w-3/4 bg-slate-700 rounded"></div>
+              <div class="grid grid-cols-3 gap-1 pt-0.5">
+                <div class="bg-slate-900 border border-slate-800 rounded p-1 space-y-1">
+                  <div class="h-6 bg-slate-800 rounded"></div>
                   <div class="text-emerald-400">৳ 2,400</div>
                 </div>
-                <div class="bg-slate-900 border border-slate-800 rounded p-1.5 space-y-1">
-                  <div class="h-8 bg-slate-800 rounded"></div>
-                  <div class="h-2 w-3/4 bg-slate-700 rounded"></div>
+                <div class="bg-slate-900 border border-slate-800 rounded p-1 space-y-1">
+                  <div class="h-6 bg-slate-800 rounded"></div>
                   <div class="text-emerald-400">৳ 4,800</div>
                 </div>
-                <div class="bg-slate-900 border border-slate-800 rounded p-1.5 space-y-1">
-                  <div class="h-8 bg-slate-800 rounded"></div>
-                  <div class="h-2 w-3/4 bg-slate-700 rounded"></div>
+                <div class="bg-slate-900 border border-slate-800 rounded p-1 space-y-1">
+                  <div class="h-6 bg-slate-800 rounded"></div>
                   <div class="text-emerald-400">৳ 1,950</div>
                 </div>
               </div>
@@ -491,216 +579,183 @@
 
             <h3 class="fluid-h3 text-white">Full E-Commerce & Brand Store</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Engineered for seamless sales conversion with local Bangladesh payment gateways, automated courier tracking, and an intuitive inventory dashboard.
+              High-converting shopping storefront with local bKash/Nagad checkout, Steadfast & Pathao courier sync, and inventory dashboard.
             </p>
-
-            <ul class="space-y-1.5 text-xs text-slate-300 font-mono">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> bKash, Nagad, Card & Cash on Delivery</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Automated Steadfast & Pathao courier sync</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Full inventory & orders manager panel</li>
-            </ul>
           </div>
 
-          <button class="w-full py-2.5 rounded-xl text-xs font-mono font-bold border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500 hover:text-black transition-all">
-            Select E-Commerce Blueprint →
+          <button class="tactile-btn w-full py-2 rounded-xl text-xs font-mono font-bold border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500 hover:text-black transition-all flex items-center justify-center gap-1.5" data-tooltip="Pre-select this blueprint for your project" title="Pre-select this blueprint for your project">
+            <span>Select E-Commerce Blueprint</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </button>
         </div>
 
         <!-- CARD 2: Corporate & Business Identity -->
-        <div class="studio-card rounded-2xl p-6 flex flex-col justify-between space-y-5 hover:border-blue-500 transition-all cursor-pointer group" onclick="preselectArchitecture('Corporate & Business Identity', '#3B82F6')">
-          <div class="space-y-4">
+        <div class="studio-card rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-blue-500 transition-all cursor-pointer group" onclick="preselectArchitecture('Corporate & Business Identity', '#3B82F6')" data-tooltip="Click to customize Corporate Identity in configurator" title="Click to customize Corporate Identity in configurator">
+          <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded text-[11px] font-mono font-bold bg-blue-500/10 text-blue-400 border border-blue-500/30">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-500/10 text-blue-400 border border-blue-500/30">
                 #3B82F6 · CORPORATE
               </span>
-              <span class="text-[11px] font-mono text-slate-500">B2B & Agencies</span>
+              <span class="text-[10px] font-mono text-slate-500">B2B & Agencies</span>
             </div>
 
             <!-- Crisp SVG UI Wireframe -->
-            <div class="w-full h-32 rounded-xl bg-slate-950/80 border border-slate-800 p-3 space-y-2 font-mono text-[9px] text-slate-500 select-none">
+            <div class="w-full h-28 rounded-xl bg-slate-950/80 border border-slate-800 p-2.5 space-y-1.5 font-mono text-[9px] text-slate-500 select-none">
               <div class="flex items-center justify-between pb-1 border-b border-slate-800">
                 <span class="text-blue-400 font-bold">&lt;AUTHORITY_PORTAL/&gt;</span>
                 <span class="text-slate-400">ISO & Trust Marks</span>
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <div class="bg-slate-900 border border-slate-800 rounded p-2 space-y-1.5">
-                  <div class="h-2.5 w-1/2 bg-blue-400/40 rounded"></div>
-                  <div class="h-2 w-full bg-slate-700 rounded"></div>
-                  <div class="h-2 w-4/5 bg-slate-700 rounded"></div>
+              <div class="grid grid-cols-2 gap-1.5 pt-0.5">
+                <div class="bg-slate-900 border border-slate-800 rounded p-1.5 space-y-1">
+                  <div class="h-2 w-1/2 bg-blue-400/40 rounded"></div>
+                  <div class="h-1.5 w-full bg-slate-700 rounded"></div>
                 </div>
-                <div class="bg-slate-900 border border-slate-800 rounded p-2 space-y-1.5">
-                  <div class="h-2.5 w-1/2 bg-blue-400/40 rounded"></div>
-                  <div class="h-2 w-full bg-slate-700 rounded"></div>
-                  <div class="h-2 w-3/4 bg-slate-700 rounded"></div>
+                <div class="bg-slate-900 border border-slate-800 rounded p-1.5 space-y-1">
+                  <div class="h-2 w-1/2 bg-blue-400/40 rounded"></div>
+                  <div class="h-1.5 w-full bg-slate-700 rounded"></div>
                 </div>
               </div>
             </div>
 
             <h3 class="fluid-h3 text-white">Corporate & Institutional Hub</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Authoritative digital presentation for corporations, law firms, consultancies, and clinics designed to establish instant institutional trust.
+              Authoritative digital presentation for companies, consultancies, law firms, and clinics designed to convert high-ticket clients.
             </p>
-
-            <ul class="space-y-1.5 text-xs text-slate-300 font-mono">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-blue-400"></i> Interactive service matrices & credentials</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-blue-400"></i> Lead quote inquiry form & calendar booking</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-blue-400"></i> Rank-1 Google SEO schema & Google Maps</li>
-            </ul>
           </div>
 
-          <button class="w-full py-2.5 rounded-xl text-xs font-mono font-bold border border-blue-500/40 text-blue-400 hover:bg-blue-600 hover:text-white transition-all">
-            Select Corporate Blueprint →
+          <button class="tactile-btn w-full py-2 rounded-xl text-xs font-mono font-bold border border-blue-500/40 text-blue-400 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center gap-1.5" data-tooltip="Pre-select this blueprint for your project" title="Pre-select this blueprint for your project">
+            <span>Select Corporate Blueprint</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </button>
         </div>
 
         <!-- CARD 3: High-Converting Sales Funnel -->
-        <div class="studio-card rounded-2xl p-6 flex flex-col justify-between space-y-5 hover:border-amber-500 transition-all cursor-pointer group" onclick="preselectArchitecture('High-Converting Landing Page', '#F59E0B')">
-          <div class="space-y-4">
+        <div class="studio-card rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-amber-500 transition-all cursor-pointer group" onclick="preselectArchitecture('High-Converting Landing Page', '#F59E0B')" data-tooltip="Click to customize Sales Funnel in configurator" title="Click to customize Sales Funnel in configurator">
+          <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded text-[11px] font-mono font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
                 #F59E0B · FUNNEL / LANDING
               </span>
-              <span class="text-[11px] font-mono text-slate-500">Course & Products</span>
+              <span class="text-[10px] font-mono text-slate-500">Course & Products</span>
             </div>
 
             <!-- Crisp SVG UI Wireframe -->
-            <div class="w-full h-32 rounded-xl bg-slate-950/80 border border-slate-800 p-3 space-y-2 font-mono text-[9px] text-slate-500 select-none">
+            <div class="w-full h-28 rounded-xl bg-slate-950/80 border border-slate-800 p-2.5 space-y-1.5 font-mono text-[9px] text-slate-500 select-none">
               <div class="flex items-center justify-between pb-1 border-b border-slate-800">
                 <span class="text-amber-400 font-bold">&lt;DIRECT_FUNNEL/&gt;</span>
                 <span class="text-emerald-400">1-Tap WhatsApp Lead</span>
               </div>
-              <div class="bg-slate-900 border border-slate-800 rounded p-2 text-center space-y-1.5">
-                <div class="h-3 w-2/3 bg-amber-400/40 rounded mx-auto"></div>
-                <div class="h-2 w-1/2 bg-slate-700 rounded mx-auto"></div>
-                <div class="inline-block px-3 py-1 bg-amber-500 text-black font-bold rounded text-[8px]">BUY NOW (৳ 1,500)</div>
+              <div class="bg-slate-900 border border-slate-800 rounded p-1.5 text-center space-y-1">
+                <div class="h-2 w-2/3 bg-amber-400/40 rounded mx-auto"></div>
+                <div class="inline-block px-2.5 py-0.5 bg-amber-500 text-black font-bold rounded text-[8px]">BUY NOW (৳ 1,500)</div>
               </div>
             </div>
 
             <h3 class="fluid-h3 text-white">High-Converting Sales Funnel</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Story-driven single page sales engine with psychological hooks, urgency timers, social proof, and frictionless lead conversion.
+              Story-driven single page sales engine with psychological hooks, urgency timers, social proof, and frictionless WhatsApp lead capture.
             </p>
-
-            <ul class="space-y-1.5 text-xs text-slate-300 font-mono">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-amber-400"></i> Video showcase & live countdown timers</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-amber-400"></i> 1-Tap WhatsApp lead popup with auto pre-fill</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-amber-400"></i> Sticky mobile purchase trigger bar</li>
-            </ul>
           </div>
 
-          <button class="w-full py-2.5 rounded-xl text-xs font-mono font-bold border border-amber-500/40 text-amber-400 hover:bg-amber-500 hover:text-black transition-all">
-            Select Funnel Blueprint →
+          <button class="tactile-btn w-full py-2 rounded-xl text-xs font-mono font-bold border border-amber-500/40 text-amber-400 hover:bg-amber-500 hover:text-black transition-all flex items-center justify-center gap-1.5" data-tooltip="Pre-select this blueprint for your project" title="Pre-select this blueprint for your project">
+            <span>Select Funnel Blueprint</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </button>
         </div>
 
-        <!-- CARD 4: Full-Stack SaaS & AI Cloud Application -->
-        <div class="studio-card rounded-2xl p-6 flex flex-col justify-between space-y-5 hover:border-purple-500 transition-all cursor-pointer group" onclick="preselectArchitecture('Custom SaaS & AI Web Application', '#8B5CF6')">
-          <div class="space-y-4">
+        <!-- CARD 4: Full-Stack SaaS & AI Application -->
+        <div class="studio-card rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-purple-500 transition-all cursor-pointer group" onclick="preselectArchitecture('Custom SaaS & AI Web Application', '#8B5CF6')" data-tooltip="Click to customize SaaS & AI App in configurator" title="Click to customize SaaS & AI App in configurator">
+          <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded text-[11px] font-mono font-bold bg-purple-500/10 text-purple-400 border border-purple-500/30">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-purple-500/10 text-purple-400 border border-purple-500/30">
                 #8B5CF6 · SAAS & AI
               </span>
-              <span class="text-[11px] font-mono text-slate-500">Cloud Platform</span>
+              <span class="text-[10px] font-mono text-slate-500">Cloud Platform</span>
             </div>
 
             <!-- Crisp SVG UI Wireframe -->
-            <div class="w-full h-32 rounded-xl bg-slate-950/80 border border-slate-800 p-3 space-y-2 font-mono text-[9px] text-slate-500 select-none">
+            <div class="w-full h-28 rounded-xl bg-slate-950/80 border border-slate-800 p-2.5 space-y-1.5 font-mono text-[9px] text-slate-500 select-none">
               <div class="flex items-center justify-between pb-1 border-b border-slate-800">
                 <span class="text-purple-400 font-bold">&lt;CLOUD_API_APP/&gt;</span>
                 <span class="text-slate-400">OpenAI / Claude LLM</span>
               </div>
-              <div class="grid grid-cols-3 gap-1 pt-1">
-                <div class="col-span-1 bg-slate-900 border border-slate-800 rounded p-1 space-y-1">
-                  <div class="h-2 w-3/4 bg-slate-700 rounded"></div>
-                  <div class="h-2 w-1/2 bg-slate-800 rounded"></div>
+              <div class="grid grid-cols-3 gap-1 pt-0.5">
+                <div class="col-span-1 bg-slate-900 border border-slate-800 rounded p-1 space-y-0.5">
+                  <div class="h-1.5 w-3/4 bg-slate-700 rounded"></div>
                 </div>
-                <div class="col-span-2 bg-slate-900 border border-slate-800 rounded p-1 space-y-1">
-                  <div class="h-2 w-full bg-purple-400/40 rounded"></div>
-                  <div class="h-2 w-5/6 bg-slate-700 rounded"></div>
-                  <div class="h-2 w-4/6 bg-slate-700 rounded"></div>
+                <div class="col-span-2 bg-slate-900 border border-slate-800 rounded p-1 space-y-0.5">
+                  <div class="h-1.5 w-full bg-purple-400/40 rounded"></div>
                 </div>
               </div>
             </div>
 
             <h3 class="fluid-h3 text-white">Full-Stack SaaS & AI App</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Custom software with secure user authentication, relational database architecture, API orchestration, and subscription billing.
+              Custom software with secure user authentication, relational database schema, streaming AI LLM chat, and subscription billing.
             </p>
-
-            <ul class="space-y-1.5 text-xs text-slate-300 font-mono">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-purple-400"></i> User auth & role-based dashboard views</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-purple-400"></i> Relational database (PostgreSQL / Supabase)</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-purple-400"></i> AI streaming chat & custom webhook pipelines</li>
-            </ul>
           </div>
 
-          <button class="w-full py-2.5 rounded-xl text-xs font-mono font-bold border border-purple-500/40 text-purple-400 hover:bg-purple-600 hover:text-white transition-all">
-            Select SaaS Blueprint →
+          <button class="tactile-btn w-full py-2 rounded-xl text-xs font-mono font-bold border border-purple-500/40 text-purple-400 hover:bg-purple-600 hover:text-white transition-all flex items-center justify-center gap-1.5" data-tooltip="Pre-select this blueprint for your project" title="Pre-select this blueprint for your project">
+            <span>Select SaaS Blueprint</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </button>
         </div>
 
         <!-- CARD 5: Minimalist Portfolio & Personal Brand -->
-        <div class="studio-card rounded-2xl p-6 flex flex-col justify-between space-y-5 hover:border-pink-500 transition-all cursor-pointer group" onclick="preselectArchitecture('Minimalist Portfolio & Personal Brand', '#EC4899')">
-          <div class="space-y-4">
+        <div class="studio-card rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-pink-500 transition-all cursor-pointer group" onclick="preselectArchitecture('Minimalist Portfolio & Personal Brand', '#EC4899')" data-tooltip="Click to customize Personal Portfolio in configurator" title="Click to customize Personal Portfolio in configurator">
+          <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded text-[11px] font-mono font-bold bg-pink-500/10 text-pink-400 border border-pink-500/30">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-pink-500/10 text-pink-400 border border-pink-500/30">
                 #EC4899 · PORTFOLIO
               </span>
-              <span class="text-[11px] font-mono text-slate-500">Designers & Founders</span>
+              <span class="text-[10px] font-mono text-slate-500">Designers & Founders</span>
             </div>
 
             <!-- Crisp SVG UI Wireframe -->
-            <div class="w-full h-32 rounded-xl bg-slate-950/80 border border-slate-800 p-3 space-y-2 font-mono text-[9px] text-slate-500 select-none">
+            <div class="w-full h-28 rounded-xl bg-slate-950/80 border border-slate-800 p-2.5 space-y-1.5 font-mono text-[9px] text-slate-500 select-none">
               <div class="flex items-center justify-between pb-1 border-b border-slate-800">
-                <span class="text-pink-400 font-bold">&lt;CURATED_CASE_STUDIES/&gt;</span>
+                <span class="text-pink-400 font-bold">&lt;CASE_STUDIES/&gt;</span>
                 <span class="text-slate-400">CV & Press</span>
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <div class="h-14 bg-slate-900 border border-slate-800 rounded p-1.5 space-y-1">
-                  <div class="h-2 w-2/3 bg-pink-400/40 rounded"></div>
-                  <div class="h-2 w-full bg-slate-700 rounded"></div>
+              <div class="grid grid-cols-2 gap-1.5 pt-0.5">
+                <div class="h-10 bg-slate-900 border border-slate-800 rounded p-1 space-y-0.5">
+                  <div class="h-1.5 w-2/3 bg-pink-400/40 rounded"></div>
                 </div>
-                <div class="h-14 bg-slate-900 border border-slate-800 rounded p-1.5 space-y-1">
-                  <div class="h-2 w-2/3 bg-pink-400/40 rounded"></div>
-                  <div class="h-2 w-full bg-slate-700 rounded"></div>
+                <div class="h-10 bg-slate-900 border border-slate-800 rounded p-1 space-y-0.5">
+                  <div class="h-1.5 w-2/3 bg-pink-400/40 rounded"></div>
                 </div>
               </div>
             </div>
 
             <h3 class="fluid-h3 text-white">Minimalist Portfolio Brand</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-              World-class editorial digital resume designed with fluid micro-interactions, interactive case studies, downloadable CV, and calendar scheduler.
+              Editorial digital resume crafted with fluid micro-interactions, interactive case studies, downloadable CV, and appointment calendar.
             </p>
-
-            <ul class="space-y-1.5 text-xs text-slate-300 font-mono">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-pink-400"></i> Magnetic hover interactions & typography</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-pink-400"></i> Live project demos & GitHub repo links</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-pink-400"></i> Downloadable PDF resume & contact scheduler</li>
-            </ul>
           </div>
 
-          <button class="w-full py-2.5 rounded-xl text-xs font-mono font-bold border border-pink-500/40 text-pink-400 hover:bg-pink-600 hover:text-white transition-all">
-            Select Portfolio Blueprint →
+          <button class="tactile-btn w-full py-2 rounded-xl text-xs font-mono font-bold border border-pink-500/40 text-pink-400 hover:bg-pink-600 hover:text-white transition-all flex items-center justify-center gap-1.5" data-tooltip="Pre-select this blueprint for your project" title="Pre-select this blueprint for your project">
+            <span>Select Portfolio Blueprint</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </button>
         </div>
 
         <!-- CARD 6: Booking & Reservation Platform -->
-        <div class="studio-card rounded-2xl p-6 flex flex-col justify-between space-y-5 hover:border-teal-500 transition-all cursor-pointer group" onclick="preselectArchitecture('Restaurant, Real Estate & Booking', '#14B8A6')">
-          <div class="space-y-4">
+        <div class="studio-card rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-teal-500 transition-all cursor-pointer group" onclick="preselectArchitecture('Restaurant, Real Estate & Booking', '#14B8A6')" data-tooltip="Click to customize Booking Platform in configurator" title="Click to customize Booking Platform in configurator">
+          <div class="space-y-3">
             <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded text-[11px] font-mono font-bold bg-teal-500/10 text-teal-400 border border-teal-500/30">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-teal-500/10 text-teal-400 border border-teal-500/30">
                 #14B8A6 · BOOKINGS
               </span>
-              <span class="text-[11px] font-mono text-slate-500">Clinics & Venues</span>
+              <span class="text-[10px] font-mono text-slate-500">Clinics & Venues</span>
             </div>
 
             <!-- Crisp SVG UI Wireframe -->
-            <div class="w-full h-32 rounded-xl bg-slate-950/80 border border-slate-800 p-3 space-y-2 font-mono text-[9px] text-slate-500 select-none">
+            <div class="w-full h-28 rounded-xl bg-slate-950/80 border border-slate-800 p-2.5 space-y-1.5 font-mono text-[9px] text-slate-500 select-none">
               <div class="flex items-center justify-between pb-1 border-b border-slate-800">
                 <span class="text-teal-400 font-bold">&lt;CALENDAR_SLOTS/&gt;</span>
                 <span class="text-emerald-400">SMS / WhatsApp Alert</span>
               </div>
-              <div class="grid grid-cols-4 gap-1 pt-1 text-center">
+              <div class="grid grid-cols-4 gap-1 pt-0.5 text-center">
                 <div class="p-1 bg-slate-900 border border-slate-800 rounded">10:00</div>
                 <div class="p-1 bg-teal-500/20 text-teal-300 border border-teal-500/40 rounded font-bold">11:30</div>
                 <div class="p-1 bg-slate-900 border border-slate-800 rounded">14:00</div>
@@ -712,16 +767,11 @@
             <p class="text-xs text-slate-400 leading-relaxed">
               Interactive menu/property catalog with real-time slot reservation system, automated customer WhatsApp confirmations, and management calendar.
             </p>
-
-            <ul class="space-y-1.5 text-xs text-slate-300 font-mono">
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-400"></i> Real-time date & time slot booking system</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-400"></i> Automated client SMS / WhatsApp confirmation</li>
-              <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-400"></i> Administrative scheduling manager</li>
-            </ul>
           </div>
 
-          <button class="w-full py-2.5 rounded-xl text-xs font-mono font-bold border border-teal-500/40 text-teal-400 hover:bg-teal-600 hover:text-white transition-all">
-            Select Booking Blueprint →
+          <button class="tactile-btn w-full py-2 rounded-xl text-xs font-mono font-bold border border-teal-500/40 text-teal-400 hover:bg-teal-600 hover:text-white transition-all flex items-center justify-center gap-1.5" data-tooltip="Pre-select this blueprint for your project" title="Pre-select this blueprint for your project">
+            <span>Select Booking Blueprint</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </button>
         </div>
 
@@ -731,120 +781,122 @@
   </section>
 
   <!-- ==========================================================================
-       SECTION 2: INTERACTIVE THEME LAB (6 TRUE PALETTES & REAL-TIME MORPHING)
+       SECTION 2: THEME LAB (COMPACT CARDS, TIGHT SPACING, INSTANT PALETTES)
        ========================================================================== -->
-  <section id="themelab" class="py-16 md:py-24 border-b" style="border-color: var(--border-color); background-color: var(--bg-card);">
-    <div class="studio-container space-y-10">
+  <section id="themelab" class="py-10 md:py-14 border-b" style="border-color: var(--border-color); background-color: var(--bg-card);">
+    <div class="studio-container space-y-6">
       
-      <div class="text-center max-w-2xl mx-auto space-y-2">
-        <div class="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold">Visual Atmosphere Lab</div>
-        <h2 class="fluid-h2 text-white">True Palette Theme Engine</h2>
-        <p class="text-xs sm:text-sm text-slate-400">
-          Click any of the 6 authentic themes below to instantly morph the entire website into that design language.
-        </p>
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-2">
+        <div class="space-y-1">
+          <div class="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold">Visual Atmosphere Lab</div>
+          <h2 class="fluid-h2 text-white">True Palette Theme Engine</h2>
+        </div>
+        <div class="text-xs font-mono text-slate-400">
+          Click any card to instantly morph the entire website into that theme.
+        </div>
       </div>
 
       <!-- 6 Authentic Theme Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         
         <!-- THEME 1: Obsidian Architectural Dark -->
-        <div onclick="applyStudioTheme('obsidian')" class="p-5 rounded-2xl border cursor-pointer transition-all hover:scale-[1.02] space-y-4" style="background-color: #050608; border-color: #6366f1;">
+        <div onclick="applyStudioTheme('obsidian')" class="tactile-btn p-4 rounded-2xl border cursor-pointer space-y-2.5" style="background-color: #050608; border-color: #6366f1;" data-tooltip="Apply Obsidian Architectural Dark" title="Apply Obsidian Architectural Dark">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono font-bold text-indigo-400">01 · OBSIDIAN DARK</span>
             <div class="flex gap-1">
-              <span class="w-3 h-3 rounded-full bg-[#050608] border border-slate-700"></span>
-              <span class="w-3 h-3 rounded-full bg-[#6366f1]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#f8fafc]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#050608] border border-slate-700"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#6366f1]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#f8fafc]"></span>
             </div>
           </div>
-          <p class="text-xs text-slate-400">Linear / Vercel dark glassmorphism with crisp structural indigo hairlines.</p>
-          <div class="pt-2 flex items-center justify-between text-xs font-mono text-slate-500 border-t border-slate-800">
-            <span>Font: Space Grotesk</span>
+          <p class="text-xs text-slate-400">Minimal dark glassmorphism with crisp structural indigo hairlines.</p>
+          <div class="pt-1.5 flex items-center justify-between text-xs font-mono text-slate-500 border-t border-slate-800">
+            <span>Space Grotesk</span>
             <span class="text-indigo-400 font-bold">Apply Theme ⚡</span>
           </div>
         </div>
 
         <!-- THEME 2: Apple Editorial Light -->
-        <div onclick="applyStudioTheme('apple')" class="p-5 rounded-2xl border cursor-pointer transition-all hover:scale-[1.02] space-y-4" style="background-color: #ffffff; border-color: #e2e8f0; color: #0f172a;">
+        <div onclick="applyStudioTheme('apple')" class="tactile-btn p-4 rounded-2xl border cursor-pointer space-y-2.5" style="background-color: #ffffff; border-color: #e2e8f0; color: #0f172a;" data-tooltip="Apply Apple Editorial Light" title="Apply Apple Editorial Light">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono font-bold text-slate-900">02 · APPLE EDITORIAL</span>
             <div class="flex gap-1">
-              <span class="w-3 h-3 rounded-full bg-[#ffffff] border border-slate-400"></span>
-              <span class="w-3 h-3 rounded-full bg-[#0f172a]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#2563eb]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#ffffff] border border-slate-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#0f172a]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#2563eb]"></span>
             </div>
           </div>
-          <p class="text-xs text-slate-600">Pure white alabaster surfaces, ultra-high contrast black typography, crisp elevation.</p>
-          <div class="pt-2 flex items-center justify-between text-xs font-mono text-slate-500 border-t border-slate-200">
-            <span>Font: Space Grotesk</span>
+          <p class="text-xs text-slate-600">Pure white surfaces, ultra-high contrast black typography, crisp elevation.</p>
+          <div class="pt-1.5 flex items-center justify-between text-xs font-mono text-slate-500 border-t border-slate-200">
+            <span>Space Grotesk</span>
             <span class="text-slate-900 font-bold">Apply Theme ⚡</span>
           </div>
         </div>
 
         <!-- THEME 3: Luxury Commerce Gold -->
-        <div onclick="applyStudioTheme('luxury')" class="p-5 rounded-2xl border cursor-pointer transition-all hover:scale-[1.02] space-y-4" style="background-color: #12100b; border-color: #d4af37;">
+        <div onclick="applyStudioTheme('luxury')" class="tactile-btn p-4 rounded-2xl border cursor-pointer space-y-2.5" style="background-color: #12100b; border-color: #d4af37;" data-tooltip="Apply Luxury Commerce Gold" title="Apply Luxury Commerce Gold">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono font-bold text-[#d4af37]">03 · LUXURY COMMERCE</span>
             <div class="flex gap-1">
-              <span class="w-3 h-3 rounded-full bg-[#12100b] border border-[#d4af37]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#d4af37]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#fef9ed]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#12100b] border border-[#d4af37]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#d4af37]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#fef9ed]"></span>
             </div>
           </div>
-          <p class="text-xs text-amber-200/70">Warm onyx surfaces, gold hairline accents, and refined luxury serif typography.</p>
-          <div class="pt-2 flex items-center justify-between text-xs font-mono text-amber-200/50 border-t border-amber-900/40">
-            <span>Font: Playfair Display</span>
+          <p class="text-xs text-amber-200/70">Warm onyx surfaces, gold hairline accents, and luxury serif typography.</p>
+          <div class="pt-1.5 flex items-center justify-between text-xs font-mono text-amber-200/50 border-t border-amber-900/40">
+            <span>Playfair Display</span>
             <span class="text-[#d4af37] font-bold">Apply Theme ⚡</span>
           </div>
         </div>
 
         <!-- THEME 4: Kinetic Neo-Brutalist -->
-        <div onclick="applyStudioTheme('brutalist')" class="p-5 rounded-2xl border-2 cursor-pointer transition-all hover:scale-[1.02] space-y-4" style="background-color: #18181b; border-color: #facc15; box-shadow: 4px 4px 0px #facc15;">
+        <div onclick="applyStudioTheme('brutalist')" class="tactile-btn p-4 rounded-2xl border-2 cursor-pointer space-y-2.5" style="background-color: #18181b; border-color: #facc15; box-shadow: 3px 3px 0px #facc15;" data-tooltip="Apply Kinetic Neo-Brutalist" title="Apply Kinetic Neo-Brutalist">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono font-bold text-yellow-400">04 · NEO-BRUTALIST</span>
             <div class="flex gap-1">
-              <span class="w-3 h-3 rounded-full bg-[#18181b] border border-yellow-400"></span>
-              <span class="w-3 h-3 rounded-full bg-[#facc15]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#ffffff]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#18181b] border border-yellow-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#facc15]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#ffffff]"></span>
             </div>
           </div>
-          <p class="text-xs text-slate-300">Bold 2px solid yellow borders, high tactile contrast, and standout creative energy.</p>
-          <div class="pt-2 flex items-center justify-between text-xs font-mono text-slate-400 border-t border-slate-700">
-            <span>Font: Space Grotesk</span>
+          <p class="text-xs text-slate-300">Bold solid yellow borders, high tactile contrast, and creative energy.</p>
+          <div class="pt-1.5 flex items-center justify-between text-xs font-mono text-slate-400 border-t border-slate-700">
+            <span>Space Grotesk</span>
             <span class="text-yellow-400 font-bold">Apply Theme ⚡</span>
           </div>
         </div>
 
         <!-- THEME 5: Executive Trust Navy -->
-        <div onclick="applyStudioTheme('navy')" class="p-5 rounded-2xl border cursor-pointer transition-all hover:scale-[1.02] space-y-4" style="background-color: #0a1628; border-color: #38bdf8;">
+        <div onclick="applyStudioTheme('navy')" class="tactile-btn p-4 rounded-2xl border cursor-pointer space-y-2.5" style="background-color: #0a1628; border-color: #38bdf8;" data-tooltip="Apply Executive Trust Navy" title="Apply Executive Trust Navy">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono font-bold text-sky-400">05 · EXECUTIVE NAVY</span>
             <div class="flex gap-1">
-              <span class="w-3 h-3 rounded-full bg-[#0a1628] border border-sky-400"></span>
-              <span class="w-3 h-3 rounded-full bg-[#38bdf8]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#f0f9ff]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#0a1628] border border-sky-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#38bdf8]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#f0f9ff]"></span>
             </div>
           </div>
-          <p class="text-xs text-sky-200/70">Deep institutional navy, sky blue micro-accents, engineered for financial and B2B platforms.</p>
-          <div class="pt-2 flex items-center justify-between text-xs font-mono text-sky-300/50 border-t border-sky-900/40">
-            <span>Font: Space Grotesk</span>
+          <p class="text-xs text-sky-200/70">Deep institutional navy, sky blue micro-accents for financial & B2B platforms.</p>
+          <div class="pt-1.5 flex items-center justify-between text-xs font-mono text-sky-300/50 border-t border-sky-900/40">
+            <span>Space Grotesk</span>
             <span class="text-sky-400 font-bold">Apply Theme ⚡</span>
           </div>
         </div>
 
         <!-- THEME 6: Emerald Startup Growth -->
-        <div onclick="applyStudioTheme('emerald')" class="p-5 rounded-2xl border cursor-pointer transition-all hover:scale-[1.02] space-y-4" style="background-color: #042f2e; border-color: #10b981;">
+        <div onclick="applyStudioTheme('emerald')" class="tactile-btn p-4 rounded-2xl border cursor-pointer space-y-2.5" style="background-color: #042f2e; border-color: #10b981;" data-tooltip="Apply Emerald Startup Growth" title="Apply Emerald Startup Growth">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono font-bold text-emerald-400">06 · EMERALD GROWTH</span>
             <div class="flex gap-1">
-              <span class="w-3 h-3 rounded-full bg-[#042f2e] border border-emerald-500"></span>
-              <span class="w-3 h-3 rounded-full bg-[#10b981]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#f0fdf4]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#042f2e] border border-emerald-500"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#10b981]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#f0fdf4]"></span>
             </div>
           </div>
-          <p class="text-xs text-emerald-200/70">Fresh deep forest green with vibrant emerald neon accents, ideal for tech & fintech.</p>
-          <div class="pt-2 flex items-center justify-between text-xs font-mono text-emerald-300/50 border-t border-emerald-900/40">
-            <span>Font: Space Grotesk</span>
+          <p class="text-xs text-emerald-200/70">Deep forest green with vibrant emerald neon accents, ideal for tech & SaaS.</p>
+          <div class="pt-1.5 flex items-center justify-between text-xs font-mono text-emerald-300/50 border-t border-emerald-900/40">
+            <span>Space Grotesk</span>
             <span class="text-emerald-400 font-bold">Apply Theme ⚡</span>
           </div>
         </div>
@@ -855,43 +907,43 @@
   </section>
 
   <!-- ==========================================================================
-       SECTION 3: 30-SECOND CLIENT CONFIGURATOR & SMART CO-PILOT
+       SECTION 3: 30-SECOND CONFIGURATOR & SMART CO-PILOT
        ========================================================================== -->
-  <section id="configurator" class="py-16 md:py-24 border-b relative" style="border-color: var(--border-color);">
-    <div class="studio-container space-y-10">
+  <section id="configurator" class="py-10 md:py-14 border-b relative" style="border-color: var(--border-color);">
+    <div class="studio-container space-y-8">
       
-      <!-- Section Title & Smart Co-Pilot -->
-      <div class="space-y-6">
-        <div class="max-w-3xl space-y-2">
+      <!-- Section Title & Smart Co-Pilot Bar -->
+      <div class="space-y-4">
+        <div class="max-w-3xl space-y-1">
           <div class="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold">Interactive Specification Engine</div>
           <h2 class="fluid-h2 text-white">Order According to Your Exact Need</h2>
           <p class="text-xs sm:text-sm text-slate-400">
-            Configure your exact page volume, payment integrations, admin capabilities, and timeline. Sazim will personally review your brief on WhatsApp (+880 1729-962141) and reply with your custom quote.
+            Configure your page volume, payment integrations, admin capabilities, and timeline. Sazim personally reviews your brief on WhatsApp (+880 1729-962141) and replies with your custom quote.
           </p>
         </div>
 
         <!-- SMART SPEC CO-PILOT BAR -->
-        <div class="p-4 rounded-2xl studio-card space-y-3">
+        <div class="p-3.5 rounded-2xl studio-card space-y-2.5">
           <div class="flex items-center justify-between text-xs font-mono">
-            <div class="flex items-center gap-2 text-indigo-400 font-bold">
+            <div class="flex items-center gap-1.5 text-indigo-400 font-bold">
               <i data-lucide="bot" class="w-4 h-4"></i>
               <span>SMART SPEC CO-PILOT</span>
             </div>
-            <span class="text-[11px] text-slate-400">Tap a preset chip to auto-configure in 1 second</span>
+            <span class="text-[11px] text-slate-400">Tap a preset chip to auto-configure in 1 second:</span>
           </div>
           
-          <!-- Preset Chips -->
+          <!-- Preset Chips with Hover Descriptions -->
           <div class="flex flex-wrap gap-2 text-xs font-mono">
-            <button onclick="applyCoPilotPreset('ecom')" class="px-3 py-1.5 rounded-lg border bg-slate-900 hover:border-emerald-500 hover:text-emerald-400 transition-all flex items-center gap-1.5 text-slate-300" style="border-color: var(--border-color);">
+            <button onclick="applyCoPilotPreset('ecom')" class="tactile-btn px-2.5 py-1 rounded-lg border bg-slate-900 hover:border-emerald-500 hover:text-emerald-400 transition-all flex items-center gap-1.5 text-slate-300" style="border-color: var(--border-color);" data-tooltip="Auto-configures E-Com store, bKash & Steadfast" title="Auto-configures E-Com store, bKash & Steadfast">
               🛍️ Fashion E-Com + bKash + Steadfast
             </button>
-            <button onclick="applyCoPilotPreset('corporate')" class="px-3 py-1.5 rounded-lg border bg-slate-900 hover:border-blue-500 hover:text-blue-400 transition-all flex items-center gap-1.5 text-slate-300" style="border-color: var(--border-color);">
+            <button onclick="applyCoPilotPreset('corporate')" class="tactile-btn px-2.5 py-1 rounded-lg border bg-slate-900 hover:border-blue-500 hover:text-blue-400 transition-all flex items-center gap-1.5 text-slate-300" style="border-color: var(--border-color);" data-tooltip="Auto-configures Corporate B2B trust hub" title="Auto-configures Corporate B2B trust hub">
               🏢 Corporate B2B Hub + Leads
             </button>
-            <button onclick="applyCoPilotPreset('funnel')" class="px-3 py-1.5 rounded-lg border bg-slate-900 hover:border-amber-500 hover:text-amber-400 transition-all flex items-center gap-1.5 text-slate-300" style="border-color: var(--border-color);">
+            <button onclick="applyCoPilotPreset('funnel')" class="tactile-btn px-2.5 py-1 rounded-lg border bg-slate-900 hover:border-amber-500 hover:text-amber-400 transition-all flex items-center gap-1.5 text-slate-300" style="border-color: var(--border-color);" data-tooltip="Auto-configures Course Landing Funnel" title="Auto-configures Course Landing Funnel">
               🎯 High-Converting Course Funnel
             </button>
-            <button onclick="applyCoPilotPreset('saas')" class="px-3 py-1.5 rounded-lg border bg-slate-900 hover:border-purple-500 hover:text-purple-400 transition-all flex items-center gap-1.5 text-slate-300" style="border-color: var(--border-color);">
+            <button onclick="applyCoPilotPreset('saas')" class="tactile-btn px-2.5 py-1 rounded-lg border bg-slate-900 hover:border-purple-500 hover:text-purple-400 transition-all flex items-center gap-1.5 text-slate-300" style="border-color: var(--border-color);" data-tooltip="Auto-configures SaaS App, DB & AI Bot" title="Auto-configures SaaS App, DB & AI Bot">
               ⚡ SaaS App + Database + AI Bot
             </button>
           </div>
@@ -899,92 +951,92 @@
       </div>
 
       <!-- Split Screen: Left Configurator Controls, Right Blueprint Summary Card -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
         <!-- LEFT: 6 Configurator Steps -->
-        <div class="lg:col-span-7 space-y-6">
+        <div class="lg:col-span-7 space-y-4">
           
           <!-- STEP 1: Select Architecture -->
-          <div class="p-6 rounded-2xl studio-card space-y-4">
-            <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--border-color);">
+          <div class="p-4 sm:p-5 rounded-2xl studio-card space-y-3">
+            <div class="flex items-center justify-between border-b pb-2.5" style="border-color: var(--border-color);">
               <div class="flex items-center gap-2">
-                <span class="w-6 h-6 rounded bg-indigo-500/20 text-indigo-400 font-mono font-bold text-xs flex items-center justify-center">1</span>
+                <span class="w-5 h-5 rounded bg-indigo-500/20 text-indigo-400 font-mono font-bold text-xs flex items-center justify-center">1</span>
                 <span class="font-heading font-bold text-sm text-white">Select Service Architecture</span>
               </div>
-              <span id="cfgArchPill" class="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">E-Commerce</span>
+              <span id="cfgArchPill" class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">E-Commerce</span>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs font-mono">
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex flex-col justify-between transition-all" id="archLabel-1">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs font-mono">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex flex-col justify-between transition-all" data-tooltip="Full shopping store with cart & checkout" title="Full shopping store with cart & checkout">
                 <input type="radio" name="cfgArch" value="Full E-Commerce & Online Store" checked class="hidden" onchange="syncConfigurator()" />
                 <span class="font-bold text-white">E-Commerce</span>
-                <span class="text-[10px] text-slate-400 mt-1">bKash, cart, courier</span>
+                <span class="text-[10px] text-slate-400 mt-0.5">bKash, cart, courier</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex flex-col justify-between transition-all" id="archLabel-2">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex flex-col justify-between transition-all" data-tooltip="Company profile & client trust portal" title="Company profile & client trust portal">
                 <input type="radio" name="cfgArch" value="Corporate & Business Identity" class="hidden" onchange="syncConfigurator()" />
                 <span class="font-bold text-white">Corporate</span>
-                <span class="text-[10px] text-slate-400 mt-1">Authority & B2B</span>
+                <span class="text-[10px] text-slate-400 mt-0.5">Authority & B2B</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex flex-col justify-between transition-all" id="archLabel-3">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex flex-col justify-between transition-all" data-tooltip="Single product sales funnel & video" title="Single product sales funnel & video">
                 <input type="radio" name="cfgArch" value="High-Converting Landing Page" class="hidden" onchange="syncConfigurator()" />
                 <span class="font-bold text-white">Landing Page</span>
-                <span class="text-[10px] text-slate-400 mt-1">Single product funnel</span>
+                <span class="text-[10px] text-slate-400 mt-0.5">Single product funnel</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex flex-col justify-between transition-all" id="archLabel-4">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex flex-col justify-between transition-all" data-tooltip="Cloud SaaS app with auth & database" title="Cloud SaaS app with auth & database">
                 <input type="radio" name="cfgArch" value="Custom SaaS & AI Web Application" class="hidden" onchange="syncConfigurator()" />
                 <span class="font-bold text-white">SaaS & AI</span>
-                <span class="text-[10px] text-slate-400 mt-1">Cloud app & database</span>
+                <span class="text-[10px] text-slate-400 mt-0.5">Cloud app & database</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex flex-col justify-between transition-all" id="archLabel-5">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex flex-col justify-between transition-all" data-tooltip="Personal digital resume & case studies" title="Personal digital resume & case studies">
                 <input type="radio" name="cfgArch" value="Minimalist Portfolio & Personal Brand" class="hidden" onchange="syncConfigurator()" />
                 <span class="font-bold text-white">Portfolio</span>
-                <span class="text-[10px] text-slate-400 mt-1">Editorial personal brand</span>
+                <span class="text-[10px] text-slate-400 mt-0.5">Editorial personal brand</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex flex-col justify-between transition-all" id="archLabel-6">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex flex-col justify-between transition-all" data-tooltip="Real-time date & time slot booking" title="Real-time date & time slot booking">
                 <input type="radio" name="cfgArch" value="Restaurant, Real Estate & Booking" class="hidden" onchange="syncConfigurator()" />
                 <span class="font-bold text-white">Booking System</span>
-                <span class="text-[10px] text-slate-400 mt-1">Real-time slots</span>
+                <span class="text-[10px] text-slate-400 mt-0.5">Real-time slots</span>
               </label>
             </div>
           </div>
 
           <!-- STEP 2: Aesthetic Theme -->
-          <div class="p-6 rounded-2xl studio-card space-y-4">
-            <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--border-color);">
+          <div class="p-4 sm:p-5 rounded-2xl studio-card space-y-3">
+            <div class="flex items-center justify-between border-b pb-2.5" style="border-color: var(--border-color);">
               <div class="flex items-center gap-2">
-                <span class="w-6 h-6 rounded bg-indigo-500/20 text-indigo-400 font-mono font-bold text-xs flex items-center justify-center">2</span>
+                <span class="w-5 h-5 rounded bg-indigo-500/20 text-indigo-400 font-mono font-bold text-xs flex items-center justify-center">2</span>
                 <span class="font-heading font-bold text-sm text-white">Aesthetic Theme Direction</span>
               </div>
-              <span id="cfgThemePill" class="text-[11px] font-mono px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-400 border border-indigo-500/40">Obsidian Dark</span>
+              <span id="cfgThemePill" class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-400 border border-indigo-500/40">Obsidian Dark</span>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs font-mono">
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-center gap-2 transition-all">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs font-mono">
+              <label class="cursor-pointer p-2 rounded-xl border studio-card flex items-center gap-2 transition-all" data-tooltip="Sleek dark glassmorphism" title="Sleek dark glassmorphism">
                 <input type="radio" name="cfgTheme" value="Obsidian Architectural Dark" checked class="hidden" onchange="syncConfigurator()" />
                 <span class="w-3 h-3 rounded-full bg-[#6366f1] shrink-0"></span>
                 <span>Obsidian Dark</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-center gap-2 transition-all">
+              <label class="cursor-pointer p-2 rounded-xl border studio-card flex items-center gap-2 transition-all" data-tooltip="Alabaster white editorial" title="Alabaster white editorial">
                 <input type="radio" name="cfgTheme" value="Apple Editorial Light" class="hidden" onchange="syncConfigurator()" />
                 <span class="w-3 h-3 rounded-full bg-slate-200 border border-slate-400 shrink-0"></span>
                 <span>Apple Light</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-center gap-2 transition-all">
+              <label class="cursor-pointer p-2 rounded-xl border studio-card flex items-center gap-2 transition-all" data-tooltip="Prestige gold & onyx" title="Prestige gold & onyx">
                 <input type="radio" name="cfgTheme" value="Luxury Commerce Gold" class="hidden" onchange="syncConfigurator()" />
                 <span class="w-3 h-3 rounded-full bg-[#d4af37] shrink-0"></span>
                 <span>Luxury Gold</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-center gap-2 transition-all">
+              <label class="cursor-pointer p-2 rounded-xl border studio-card flex items-center gap-2 transition-all" data-tooltip="Tactile yellow borders" title="Tactile yellow borders">
                 <input type="radio" name="cfgTheme" value="Kinetic Neo-Brutalist" class="hidden" onchange="syncConfigurator()" />
                 <span class="w-3 h-3 rounded-full bg-[#facc15] shrink-0"></span>
                 <span>Neo-Brutalist</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-center gap-2 transition-all">
+              <label class="cursor-pointer p-2 rounded-xl border studio-card flex items-center gap-2 transition-all" data-tooltip="Deep corporate blue" title="Deep corporate blue">
                 <input type="radio" name="cfgTheme" value="Executive Trust Navy" class="hidden" onchange="syncConfigurator()" />
                 <span class="w-3 h-3 rounded-full bg-[#38bdf8] shrink-0"></span>
                 <span>Trust Navy</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-center gap-2 transition-all">
+              <label class="cursor-pointer p-2 rounded-xl border studio-card flex items-center gap-2 transition-all" data-tooltip="Fresh tech emerald" title="Fresh tech emerald">
                 <input type="radio" name="cfgTheme" value="Emerald Startup Growth" class="hidden" onchange="syncConfigurator()" />
                 <span class="w-3 h-3 rounded-full bg-[#10b981] shrink-0"></span>
                 <span>Emerald Growth</span>
@@ -993,17 +1045,17 @@
           </div>
 
           <!-- STEP 3: Page Count Slider & Content Assets -->
-          <div class="p-6 rounded-2xl studio-card space-y-4">
-            <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--border-color);">
+          <div class="p-4 sm:p-5 rounded-2xl studio-card space-y-3">
+            <div class="flex items-center justify-between border-b pb-2.5" style="border-color: var(--border-color);">
               <div class="flex items-center gap-2">
-                <span class="w-6 h-6 rounded bg-indigo-500/20 text-indigo-400 font-mono font-bold text-xs flex items-center justify-center">3</span>
-                <span class="font-heading font-bold text-sm text-white">Page Count & Asset Status</span>
+                <span class="w-5 h-5 rounded bg-indigo-500/20 text-indigo-400 font-mono font-bold text-xs flex items-center justify-center">3</span>
+                <span class="font-heading font-bold text-sm text-white">Page Count & Asset Readiness</span>
               </div>
               <span id="cfgPagesDisplay" class="text-xs font-mono font-bold text-indigo-400 px-2 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/30">5 Pages</span>
             </div>
 
-            <div class="space-y-2">
-              <input type="range" id="cfgPagesSlider" min="1" max="25" value="5" class="w-full accent-indigo-500 cursor-pointer" oninput="syncConfigurator()" />
+            <div class="space-y-1.5">
+              <input type="range" id="cfgPagesSlider" min="1" max="25" value="5" class="w-full accent-indigo-500 cursor-pointer" oninput="syncConfigurator()" data-tooltip="Drag to adjust page count" title="Drag to adjust page count" />
               <div class="flex justify-between text-[10px] font-mono text-slate-500">
                 <span>1 Page (Landing)</span>
                 <span>5 Pages (Standard)</span>
@@ -1011,15 +1063,15 @@
               </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-mono">
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-start gap-2.5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-xs font-mono">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex items-start gap-2" data-tooltip="I have logo, text and media ready" title="I have logo, text and media ready">
                 <input type="radio" name="cfgAssets" value="Client has content & logo ready" checked onchange="syncConfigurator()" class="mt-0.5 accent-indigo-500" />
                 <div>
                   <div class="font-bold text-white">Content Ready</div>
                   <div class="text-[10px] text-slate-400">I have text, logo & media ready.</div>
                 </div>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-start gap-2.5">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex items-start gap-2" data-tooltip="Studio crafts copy and custom logo" title="Studio crafts copy and custom logo">
                 <input type="radio" name="cfgAssets" value="Studio to craft branding & copy" onchange="syncConfigurator()" class="mt-0.5 accent-indigo-500" />
                 <div>
                   <div class="font-bold text-white">Studio Crafting</div>
@@ -1030,45 +1082,45 @@
           </div>
 
           <!-- STEP 4: Features & Integrations -->
-          <div class="p-6 rounded-2xl studio-card space-y-4">
-            <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--border-color);">
+          <div class="p-4 sm:p-5 rounded-2xl studio-card space-y-3">
+            <div class="flex items-center justify-between border-b pb-2.5" style="border-color: var(--border-color);">
               <div class="flex items-center gap-2">
-                <span class="w-6 h-6 rounded bg-indigo-500/20 text-indigo-400 font-mono font-bold text-xs flex items-center justify-center">4</span>
+                <span class="w-5 h-5 rounded bg-indigo-500/20 text-indigo-400 font-mono font-bold text-xs flex items-center justify-center">4</span>
                 <span class="font-heading font-bold text-sm text-white">Features & Integrations</span>
               </div>
               <span id="cfgFeaturesCount" class="text-xs font-mono text-emerald-400">4 Selected</span>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs font-mono">
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-start gap-2.5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex items-start gap-2" data-tooltip="bKash Merchant API, Nagad & Cash on Delivery" title="bKash Merchant API, Nagad & Cash on Delivery">
                 <input type="checkbox" name="cfgFeat" value="bKash / Nagad / Card Gateway" checked onchange="syncConfigurator()" class="mt-0.5 accent-indigo-500" />
                 <span>bKash, Nagad, Card & COD</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-start gap-2.5">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex items-start gap-2" data-tooltip="Automated shipping cost & tracking" title="Automated shipping cost & tracking">
                 <input type="checkbox" name="cfgFeat" value="Pathao / Steadfast Courier Sync" checked onchange="syncConfigurator()" class="mt-0.5 accent-indigo-500" />
                 <span>Pathao & Steadfast Courier</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-start gap-2.5">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex items-start gap-2" data-tooltip="Custom admin dashboard to manage products & orders" title="Custom admin dashboard to manage products & orders">
                 <input type="checkbox" name="cfgFeat" value="Full Role-Based Admin Panel" checked onchange="syncConfigurator()" class="mt-0.5 accent-indigo-500" />
                 <span>Role-Based Admin Panel</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-start gap-2.5">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex items-start gap-2" data-tooltip="Automated customer orders sent to WhatsApp" title="Automated customer orders sent to WhatsApp">
                 <input type="checkbox" name="cfgFeat" value="Direct WhatsApp Order Alert" checked onchange="syncConfigurator()" class="mt-0.5 accent-indigo-500" />
                 <span>WhatsApp Order Automation</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-start gap-2.5">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex items-start gap-2" data-tooltip="DNS setup, SSL certificate & custom domain" title="DNS setup, SSL certificate & custom domain">
                 <input type="checkbox" name="cfgFeat" value="Custom Domain (.com/.bd) + SSL" onchange="syncConfigurator()" class="mt-0.5 accent-indigo-500" />
                 <span>Custom Domain (.com/.bd) + SSL</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-start gap-2.5">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex items-start gap-2" data-tooltip="One-click English and Bengali language toggle" title="One-click English and Bengali language toggle">
                 <input type="checkbox" name="cfgFeat" value="Bilingual Support (English + বাংলা)" onchange="syncConfigurator()" class="mt-0.5 accent-indigo-500" />
                 <span>Bilingual (English + বাংলা)</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-start gap-2.5">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex items-start gap-2" data-tooltip="Custom AI chatbot trained on your product catalog" title="Custom AI chatbot trained on your product catalog">
                 <input type="checkbox" name="cfgFeat" value="AI Assistant / Custom Chatbot" onchange="syncConfigurator()" class="mt-0.5 accent-indigo-500" />
                 <span>AI Assistant / Smart Bot</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex items-start gap-2.5">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex items-start gap-2" data-tooltip="Guaranteed 99+ Lighthouse speed score" title="Guaranteed 99+ Lighthouse speed score">
                 <input type="checkbox" name="cfgFeat" value="99+ Google Speed Score Guarantee" onchange="syncConfigurator()" class="mt-0.5 accent-indigo-500" />
                 <span>99+ Google Speed Score SLA</span>
               </label>
@@ -1076,54 +1128,54 @@
           </div>
 
           <!-- STEP 5: Delivery SLA Speed -->
-          <div class="p-6 rounded-2xl studio-card space-y-4">
-            <div class="flex items-center gap-2 border-b pb-3" style="border-color: var(--border-color);">
-              <span class="w-6 h-6 rounded bg-indigo-500/20 text-indigo-400 font-mono font-bold text-xs flex items-center justify-center">5</span>
+          <div class="p-4 sm:p-5 rounded-2xl studio-card space-y-3">
+            <div class="flex items-center gap-2 border-b pb-2.5" style="border-color: var(--border-color);">
+              <span class="w-5 h-5 rounded bg-indigo-500/20 text-indigo-400 font-mono font-bold text-xs flex items-center justify-center">5</span>
               <span class="font-heading font-bold text-sm text-white">Delivery Timeline SLA</span>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs font-mono">
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex flex-col justify-between">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-mono">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex flex-col justify-between" data-tooltip="Standard delivery with full QA testing" title="Standard delivery with full QA testing">
                 <input type="radio" name="cfgSLA" value="Standard 7–10 Business Days" checked onchange="syncConfigurator()" class="hidden" />
                 <span class="font-bold text-white">Standard Launch</span>
-                <span class="text-[11px] text-emerald-400 mt-1">7–10 Business Days</span>
+                <span class="text-[10px] text-emerald-400 mt-0.5">7–10 Business Days</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex flex-col justify-between">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex flex-col justify-between" data-tooltip="Fast-track front-of-queue build" title="Fast-track front-of-queue build">
                 <input type="radio" name="cfgSLA" value="Priority 3–5 Business Days" onchange="syncConfigurator()" class="hidden" />
                 <span class="font-bold text-white">Fast-Track</span>
-                <span class="text-[11px] text-indigo-400 mt-1">3–5 Business Days</span>
+                <span class="text-[10px] text-indigo-400 mt-0.5">3–5 Business Days</span>
               </label>
-              <label class="cursor-pointer p-3 rounded-xl border studio-card flex flex-col justify-between">
+              <label class="cursor-pointer p-2.5 rounded-xl border studio-card flex flex-col justify-between" data-tooltip="Urgent 48-hour sprint MVP deployment" title="Urgent 48-hour sprint MVP deployment">
                 <input type="radio" name="cfgSLA" value="Express 48-Hour Sprint Launch" onchange="syncConfigurator()" class="hidden" />
                 <span class="font-bold text-white">Express Sprint</span>
-                <span class="text-[11px] text-amber-400 mt-1">48-Hour MVP Launch</span>
+                <span class="text-[10px] text-amber-400 mt-0.5">48-Hour MVP Launch</span>
               </label>
             </div>
           </div>
 
           <!-- STEP 6: Client Contact Details -->
-          <div class="p-6 rounded-2xl studio-card space-y-4">
-            <div class="flex items-center gap-2 border-b pb-3" style="border-color: var(--border-color);">
-              <span class="w-6 h-6 rounded bg-indigo-500/20 text-indigo-400 font-mono font-bold text-xs flex items-center justify-center">6</span>
+          <div class="p-4 sm:p-5 rounded-2xl studio-card space-y-3">
+            <div class="flex items-center gap-2 border-b pb-2.5" style="border-color: var(--border-color);">
+              <span class="w-5 h-5 rounded bg-indigo-500/20 text-indigo-400 font-mono font-bold text-xs flex items-center justify-center">6</span>
               <span class="font-heading font-bold text-sm text-white">Client Identification</span>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label class="block text-xs font-mono text-slate-400 mb-1">Full Name <span class="text-red-400">*</span></label>
-                <input type="text" id="clientNameInput" placeholder="e.g. Sazim Hasan" class="w-full px-3.5 py-2.5 rounded-xl studio-card text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500" oninput="syncConfigurator()" />
+                <input type="text" id="clientNameInput" placeholder="e.g. Sazim Hasan" class="w-full px-3 py-2 rounded-xl studio-card text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500" oninput="syncConfigurator()" />
               </div>
               <div>
                 <label class="block text-xs font-mono text-slate-400 mb-1">WhatsApp / Phone <span class="text-red-400">*</span></label>
-                <input type="text" id="clientPhoneInput" placeholder="e.g. +880 1729-962141" class="w-full px-3.5 py-2.5 rounded-xl studio-card text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500" oninput="syncConfigurator()" />
+                <input type="text" id="clientPhoneInput" placeholder="e.g. +880 1729-962141" class="w-full px-3 py-2 rounded-xl studio-card text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500" oninput="syncConfigurator()" />
               </div>
               <div class="sm:col-span-2">
                 <label class="block text-xs font-mono text-slate-400 mb-1">Brand or Company Name</label>
-                <input type="text" id="clientCompanyInput" placeholder="e.g. Apex Studio" class="w-full px-3.5 py-2.5 rounded-xl studio-card text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500" oninput="syncConfigurator()" />
+                <input type="text" id="clientCompanyInput" placeholder="e.g. Apex Studio" class="w-full px-3 py-2 rounded-xl studio-card text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500" oninput="syncConfigurator()" />
               </div>
               <div class="sm:col-span-2">
                 <label class="block text-xs font-mono text-slate-400 mb-1">Specific Instructions / Reference Links</label>
-                <textarea id="clientNotesInput" rows="2" placeholder="Mention preferred features or paste reference links..." class="w-full px-3.5 py-2.5 rounded-xl studio-card text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500" oninput="syncConfigurator()"></textarea>
+                <textarea id="clientNotesInput" rows="2" placeholder="Mention preferred features or paste reference links..." class="w-full px-3 py-2 rounded-xl studio-card text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500" oninput="syncConfigurator()"></textarea>
               </div>
             </div>
           </div>
@@ -1131,10 +1183,10 @@
         </div>
 
         <!-- RIGHT: Sticky Blueprint Summary Card (Desktop) -->
-        <div class="lg:col-span-5 sticky top-24 space-y-4">
-          <div class="p-6 rounded-2xl studio-card space-y-6">
+        <div class="lg:col-span-5 sticky top-20 space-y-3">
+          <div class="p-5 rounded-2xl studio-card space-y-4">
             
-            <div class="flex items-center justify-between pb-3 border-b" style="border-color: var(--border-color);">
+            <div class="flex items-center justify-between pb-2.5 border-b" style="border-color: var(--border-color);">
               <div>
                 <div class="font-heading font-bold text-base text-white">Project Blueprint Summary</div>
                 <div class="text-[11px] font-mono text-slate-500" id="summaryOrderId">ID: #NGD-8492</div>
@@ -1145,7 +1197,7 @@
             </div>
 
             <!-- Dynamic Specs List -->
-            <div class="space-y-2.5 text-xs font-mono">
+            <div class="space-y-2 text-xs font-mono">
               <div class="flex justify-between">
                 <span class="text-slate-400">Architecture:</span>
                 <span class="text-white font-bold text-right" id="sumArch">E-Commerce Store</span>
@@ -1163,8 +1215,8 @@
                 <span class="text-emerald-400 text-right" id="sumSLA">Standard (7–10 Days)</span>
               </div>
               
-              <div class="pt-2 border-t" style="border-color: var(--border-color);">
-                <div class="text-slate-400 mb-1.5">Selected Modules:</div>
+              <div class="pt-1.5 border-t" style="border-color: var(--border-color);">
+                <div class="text-slate-400 mb-1">Selected Modules:</div>
                 <div id="sumFeaturesList" class="flex flex-wrap gap-1">
                   <!-- Injected via JS -->
                 </div>
@@ -1172,26 +1224,26 @@
             </div>
 
             <!-- Pricing Notice -->
-            <div class="p-3.5 rounded-xl studio-card-subtle text-xs space-y-1">
-              <div class="flex items-center justify-between font-mono text-[11px]">
-                <span class="text-slate-400">PRICING STRUCTURE:</span>
+            <div class="p-3 rounded-xl studio-card-subtle text-xs space-y-1">
+              <div class="flex items-center justify-between font-mono text-[10px]">
+                <span class="text-slate-400 uppercase">PRICING STRUCTURE:</span>
                 <span class="text-emerald-400 font-bold">50% Advance / 50% Handover</span>
               </div>
-              <p class="text-[11px] text-slate-400 leading-relaxed">
-                Custom calculated according to your exact volume. Sazim reviews your specifications on WhatsApp and replies with your itemized quote within minutes.
+              <p class="text-[10px] text-slate-400 leading-relaxed">
+                Custom calculated. Sazim reviews your specifications on WhatsApp and replies with your itemized quote within minutes.
               </p>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="space-y-2.5 pt-1">
+            <!-- Action Buttons with High Tactile Affordance -->
+            <div class="space-y-2 pt-1">
               <!-- WhatsApp Primary Action -->
-              <button onclick="dispatchOrderToWhatsApp()" class="w-full py-3.5 rounded-xl font-mono font-bold text-xs text-white shadow-lg flex items-center justify-center gap-2 hover:brightness-110 transition-all" style="background-color: var(--accent);">
+              <button onclick="dispatchOrderToWhatsApp()" class="tactile-btn w-full py-3 rounded-xl font-mono font-bold text-xs text-white shadow-lg flex items-center justify-center gap-2 hover:brightness-110 transition-all" style="background-color: var(--accent);" data-tooltip="Directly send order specs to Sazim's WhatsApp" title="Directly send order specs to Sazim's WhatsApp">
                 <i data-lucide="send" class="w-4 h-4"></i>
                 <span>Launch Order -> WhatsApp (+880 1729-962141)</span>
               </button>
 
               <!-- Download Quotation A4 PDF -->
-              <button onclick="previewA4Document('quotation')" class="w-full py-2.5 rounded-xl font-mono text-xs border studio-card flex items-center justify-center gap-2 text-slate-300 hover:text-white transition-all">
+              <button onclick="previewA4Document('quotation')" class="tactile-btn w-full py-2.5 rounded-xl font-mono text-xs border studio-card flex items-center justify-center gap-2 text-slate-300 hover:text-white transition-all" data-tooltip="Print or save official stamped PDF quotation" title="Print or save official stamped PDF quotation">
                 <i data-lucide="file-text" class="w-4 h-4 text-indigo-400"></i>
                 <span>Generate Official Quotation (A4 PDF)</span>
               </button>
@@ -1208,17 +1260,17 @@
   <!-- ==========================================================================
        DOCKABLE MOBILE STICKY BOTTOM SUMMARY BAR (iOS / ANDROID SAFE-AREA DOCKED)
        ========================================================================== -->
-  <div class="lg:hidden fixed bottom-0 inset-x-0 z-30 border-t backdrop-blur-xl p-3 pb-safe" style="background-color: var(--bg-card); border-color: var(--border-color); padding-bottom: max(0.75rem, env(safe-area-inset-bottom));">
-    <div class="flex items-center justify-between gap-3">
+  <div class="lg:hidden fixed bottom-0 inset-x-0 z-30 border-t backdrop-blur-xl p-2.5 pb-safe" style="background-color: var(--bg-card); border-color: var(--border-color); padding-bottom: max(0.6rem, env(safe-area-inset-bottom));">
+    <div class="flex items-center justify-between gap-2.5">
       <div>
-        <div class="text-[10px] font-mono text-slate-400 uppercase">Selected Build</div>
-        <div class="text-xs font-mono font-bold text-white truncate max-w-[170px]" id="mobileBarTitle">E-Commerce (5 Pages)</div>
+        <div class="text-[9px] font-mono text-slate-400 uppercase">Selected Build</div>
+        <div class="text-xs font-mono font-bold text-white truncate max-w-[160px]" id="mobileBarTitle">E-Commerce (5 Pages)</div>
       </div>
-      <div class="flex items-center gap-2">
-        <button onclick="previewA4Document('quotation')" class="p-2.5 rounded-xl border studio-card text-indigo-400 text-xs" title="View A4 Quote">
+      <div class="flex items-center gap-1.5">
+        <button onclick="previewA4Document('quotation')" class="tactile-btn p-2 rounded-xl border studio-card text-indigo-400 text-xs" data-tooltip="View A4 Quote PDF" title="View A4 Quote PDF">
           <i data-lucide="file-text" class="w-4 h-4"></i>
         </button>
-        <button onclick="dispatchOrderToWhatsApp()" class="px-3.5 py-2.5 rounded-xl font-mono font-bold text-xs text-white flex items-center gap-1.5 shadow-md" style="background-color: var(--accent);">
+        <button onclick="dispatchOrderToWhatsApp()" class="tactile-btn px-3 py-2 rounded-xl font-mono font-bold text-xs text-white flex items-center gap-1 shadow-md" style="background-color: var(--accent);" data-tooltip="Send order to WhatsApp" title="Send order to WhatsApp">
           <i data-lucide="send" class="w-3.5 h-3.5"></i>
           <span>Order via WA</span>
         </button>
@@ -1229,44 +1281,46 @@
   <!-- ==========================================================================
        SECTION 4: SLA GUARANTEES & BANGLADESH DIGITAL COMMERCE COMPLIANCE
        ========================================================================== -->
-  <section id="slaguarantee" class="py-16 md:py-24 border-b" style="border-color: var(--border-color);">
-    <div class="studio-container space-y-12">
+  <section id="slaguarantee" class="py-10 md:py-14 border-b" style="border-color: var(--border-color);">
+    <div class="studio-container space-y-8">
       
-      <div class="text-center max-w-2xl mx-auto space-y-2">
-        <div class="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold">Engineering SLA & Quality Standards</div>
-        <h2 class="fluid-h2 text-white">Full Transparency & Accountability</h2>
-        <p class="text-xs sm:text-sm text-slate-400">
-          Compliant with Bangladesh Digital Commerce guidelines. Clear milestones, legally compliant invoices, and dedicated post-launch support.
-        </p>
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-2">
+        <div class="space-y-1">
+          <div class="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold">Engineering SLA & Quality Standards</div>
+          <h2 class="fluid-h2 text-white">Full Transparency & Accountability</h2>
+        </div>
+        <div class="text-xs font-mono text-slate-400">
+          Compliant with Bangladesh Digital Commerce guidelines.
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div class="p-5 rounded-2xl studio-card space-y-2">
-          <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold text-xs">50%</div>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="p-4 rounded-2xl studio-card space-y-1.5" data-tooltip="50% milestone billing model" title="50% milestone billing model">
+          <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold text-xs">50%</div>
           <h3 class="font-heading font-bold text-sm text-white">50/50 Milestone Structure</h3>
           <p class="text-xs text-slate-400 leading-relaxed">
             50% advance on specification freeze; 50% only upon staging approval and domain launch.
           </p>
         </div>
 
-        <div class="p-5 rounded-2xl studio-card space-y-2">
-          <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-mono font-bold text-xs">SLA</div>
+        <div class="p-4 rounded-2xl studio-card space-y-1.5" data-tooltip="Guaranteed delivery timeframe" title="Guaranteed delivery timeframe">
+          <div class="w-7 h-7 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-mono font-bold text-xs">SLA</div>
           <h3 class="font-heading font-bold text-sm text-white">Strict Timeline SLA</h3>
           <p class="text-xs text-slate-400 leading-relaxed">
             3 to 30 business day guaranteed delivery window with live staging milestone check-ins.
           </p>
         </div>
 
-        <div class="p-5 rounded-2xl studio-card space-y-2">
-          <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-mono font-bold text-xs">30D</div>
+        <div class="p-4 rounded-2xl studio-card space-y-1.5" data-tooltip="30-day bug warranty included" title="30-day bug warranty included">
+          <div class="w-7 h-7 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-mono font-bold text-xs">30D</div>
           <h3 class="font-heading font-bold text-sm text-white">30-Day Bug Warranty</h3>
           <p class="text-xs text-slate-400 leading-relaxed">
             Immediate bug fixes, performance monitoring, and DNS guarantee for 30 days post-handover.
           </p>
         </div>
 
-        <div class="p-5 rounded-2xl studio-card space-y-2">
-          <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-mono font-bold text-xs">PDF</div>
+        <div class="p-4 rounded-2xl studio-card space-y-1.5" data-tooltip="Official tax invoices & quotations" title="Official tax invoices & quotations">
+          <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-mono font-bold text-xs">PDF</div>
           <h3 class="font-heading font-bold text-sm text-white">Official Tax Documentation</h3>
           <p class="text-xs text-slate-400 leading-relaxed">
             Instant itemized A4 Quotations and Commercial Invoices with Bangladesh jurisdiction.
@@ -1278,38 +1332,38 @@
   </section>
 
   <!-- ==========================================================================
-       FOOTER & LEGAL COMPLIANCE LINKS
+       FOOTER & LEGAL COMPLIANCE LINKS (COMPACT)
        ========================================================================== -->
-  <footer class="py-12 border-t text-xs font-mono text-slate-400" style="border-color: var(--border-color); background-color: var(--bg-card);">
-    <div class="studio-container space-y-8">
+  <footer class="py-8 border-t text-xs font-mono text-slate-400" style="border-color: var(--border-color); background-color: var(--bg-card);">
+    <div class="studio-container space-y-6">
       
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b" style="border-color: var(--border-color);">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b" style="border-color: var(--border-color);">
         <div>
           <div class="flex items-center gap-2 text-white font-heading font-bold text-sm">
             <span>NextGenDev™ Studio</span>
             <span class="text-slate-500">·</span>
             <span class="text-xs font-mono text-indigo-400">By Sazim Hasan Pial</span>
           </div>
-          <p class="text-xs text-slate-400 mt-1">
+          <p class="text-[11px] text-slate-400 mt-0.5">
             Lead Software Engineer: CSE @ AIUB · Full-Stack Web, C/C++, Data Structures & AI Systems.
           </p>
         </div>
 
-        <div class="flex flex-wrap items-center gap-4">
-          <a href="https://wa.me/8801729962141" target="_blank" class="hover:text-emerald-400 transition-colors">WhatsApp: +880 1729-962141</a>
-          <a href="mailto:sajimhasan12@gmail.com" class="hover:text-white transition-colors">sajimhasan12@gmail.com</a>
-          <a href="https://github.com/sazimhasanpial" target="_blank" class="hover:text-white transition-colors">GitHub: @sazimhasanpial</a>
+        <div class="flex flex-wrap items-center gap-3 text-xs">
+          <a href="https://wa.me/8801729962141" target="_blank" class="hover:text-emerald-400 transition-colors" data-tooltip="Open WhatsApp hotline" title="Open WhatsApp hotline">WhatsApp: +880 1729-962141</a>
+          <a href="mailto:sajimhasan12@gmail.com" class="hover:text-white transition-colors" data-tooltip="Send direct email" title="Send direct email">sajimhasan12@gmail.com</a>
+          <a href="https://github.com/sazimhasanpial" target="_blank" class="hover:text-white transition-colors" data-tooltip="View GitHub profile" title="View GitHub profile">GitHub: @sazimhasanpial</a>
         </div>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] text-slate-500">
         <div>
           © 2026 NextGenDev™ Studio. All rights reserved. Dhaka, Bangladesh.
         </div>
         <div class="flex items-center gap-4">
-          <button onclick="openLegalModal('tos')" class="hover:text-slate-300">Terms of Service</button>
-          <button onclick="openLegalModal('privacy')" class="hover:text-slate-300">Privacy Policy</button>
-          <button onclick="openLegalModal('refund')" class="hover:text-slate-300">Payment & Refund SLA</button>
+          <button onclick="openLegalModal('tos')" class="hover:text-slate-300" data-tooltip="View Terms of Service" title="View Terms of Service">Terms of Service</button>
+          <button onclick="openLegalModal('privacy')" class="hover:text-slate-300" data-tooltip="View Privacy Policy" title="View Privacy Policy">Privacy Policy</button>
+          <button onclick="openLegalModal('refund')" class="hover:text-slate-300" data-tooltip="View Payment & Refund SLA" title="View Payment & Refund SLA">Payment & Refund SLA</button>
         </div>
       </div>
 
@@ -1319,82 +1373,82 @@
   <!-- ==========================================================================
        MODAL A: CLIENT LOGIN & LIVE PROJECT TRACKER PORTAL
        ========================================================================== -->
-  <div id="clientPortalModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 sheet-modal-backdrop">
-    <div class="studio-card sheet-modal-content rounded-2xl w-full max-w-2xl p-6 sm:p-8 space-y-6">
+  <div id="clientPortalModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-6 sheet-modal-backdrop">
+    <div class="studio-card sheet-modal-content rounded-2xl w-full max-w-2xl p-5 sm:p-7 space-y-5">
       
-      <div class="flex items-center justify-between border-b pb-4" style="border-color: var(--border-color);">
+      <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--border-color);">
         <div>
           <div class="flex items-center gap-2">
             <i data-lucide="folder-check" class="w-5 h-5 text-indigo-400"></i>
-            <h3 class="font-heading font-bold text-lg text-white">Client Project Portal</h3>
+            <h3 class="font-heading font-bold text-base text-white">Client Project Portal</h3>
           </div>
-          <p class="text-xs text-slate-400 font-mono mt-0.5">Track live build progress & access official documents</p>
+          <p class="text-[11px] text-slate-400 font-mono mt-0.5">Track live build progress & access official documents</p>
         </div>
-        <button onclick="closeClientPortalModal()" class="p-2 rounded-lg studio-card text-slate-400 hover:text-white">
+        <button onclick="closeClientPortalModal()" class="tactile-btn p-1.5 rounded-lg studio-card text-slate-400 hover:text-white" data-tooltip="Close portal" title="Close portal">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
       <!-- Login / Order Lookup Form -->
-      <div id="portalLoginForm" class="space-y-4">
+      <div id="portalLoginForm" class="space-y-3">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
           <div>
             <label class="block text-slate-400 mb-1">Order ID</label>
-            <input type="text" id="portalOrderIdInput" placeholder="#NGD-8492" class="w-full px-3.5 py-2.5 rounded-xl studio-card text-white focus:outline-none focus:border-indigo-500" />
+            <input type="text" id="portalOrderIdInput" placeholder="#NGD-8492" class="w-full px-3 py-2 rounded-xl studio-card text-white focus:outline-none focus:border-indigo-500" />
           </div>
           <div>
             <label class="block text-slate-400 mb-1">WhatsApp / Phone</label>
-            <input type="text" id="portalPhoneInput" placeholder="+880 1729-962141" class="w-full px-3.5 py-2.5 rounded-xl studio-card text-white focus:outline-none focus:border-indigo-500" />
+            <input type="text" id="portalPhoneInput" placeholder="+880 1729-962141" class="w-full px-3 py-2 rounded-xl studio-card text-white focus:outline-none focus:border-indigo-500" />
           </div>
         </div>
 
-        <div class="flex items-center gap-3 pt-1">
-          <button onclick="loginClientPortal()" class="flex-1 py-2.5 rounded-xl font-mono font-bold text-xs text-white" style="background-color: var(--accent);">
+        <div class="flex items-center gap-2.5 pt-1">
+          <button onclick="loginClientPortal()" class="tactile-btn flex-1 py-2.5 rounded-xl font-mono font-bold text-xs text-white" style="background-color: var(--accent);" data-tooltip="Look up order status" title="Look up order status">
             Access Order Status →
           </button>
-          <button onclick="loadDemoOrderInPortal()" class="px-3.5 py-2.5 rounded-xl font-mono text-xs border studio-card text-slate-300 hover:text-white">
+          <button onclick="loadDemoOrderInPortal()" class="tactile-btn px-3 py-2.5 rounded-xl font-mono text-xs border studio-card text-slate-300 hover:text-white" data-tooltip="View demo order #NGD-8492" title="View demo order #NGD-8492">
             Load Demo Order #NGD-8492
           </button>
         </div>
       </div>
 
       <!-- Live Order Tracker View (Hidden until login) -->
-      <div id="portalTrackView" class="hidden space-y-6">
+      <div id="portalTrackView" class="hidden space-y-4">
         
         <!-- Order Header Badge -->
-        <div class="p-4 rounded-xl studio-card-subtle flex items-center justify-between">
+        <div class="p-3.5 rounded-xl studio-card-subflex flex items-center justify-between border" style="border-color: var(--border-color);">
           <div>
-            <div class="text-[11px] font-mono text-slate-400 uppercase">Active Project</div>
-            <div class="font-heading font-bold text-base text-white" id="portalProjectTitle">Apex Brand E-Commerce Store</div>
-            <div class="text-[11px] font-mono text-indigo-400" id="portalOrderIdBadge">Order #NGD-8492</div>
+            <div class="text-[10px] font-mono text-slate-400 uppercase">Active Project</div>
+            <div class="font-heading font-bold text-sm text-white" id="portalProjectTitle">Apex Brand E-Commerce Store</div>
+            <div class="text-[10px] font-mono text-indigo-400" id="portalOrderIdBadge">Order #NGD-8492</div>
           </div>
-          <span class="px-2.5 py-1 rounded text-xs font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+          <span class="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
             Phase 3: Full-Stack Build
           </span>
         </div>
 
         <!-- 4-Stage Live Progress Tracker -->
-        <div class="space-y-3 font-mono text-xs">
-          <div class="text-slate-400 uppercase text-[11px]">4-Stage Engineering Lifecycle:</div>
-          <div class="grid grid-cols-4 gap-2 text-center text-[10px]">
-            <div class="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold">
+        <div class="space-y-2 font-mono text-xs">
+          <div class="text-slate-400 uppercase text-[10px]">4-Stage Engineering Lifecycle:</div>
+          <div class="grid grid-cols-4 gap-1.5 text-center text-[10px]">
+            <div class="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold">
               1. Spec Locked ✓
             </div>
-            <div class="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold">
+            <div class="p-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold">
               2. Wireframe ✓
             </div>
-            <div class="p-2 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-bold animate-pulse">
+            <div class="p-1.5 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-bold animate-pulse">
               3. Build (60%)
             </div>
-            <div class="p-2 rounded-lg bg-slate-900 text-slate-500 border border-slate-800">
+            <div class="p-1.5 rounded-lg bg-slate-900 text-slate-500 border border-slate-800">
               4. Deployment
             </div>
           </div>
         </div>
 
         <!-- Staging Link & Financial Milestones -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
-          <div class="p-3.5 rounded-xl studio-card space-y-1">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs font-mono">
+          <div class="p-3 rounded-xl studio-card space-y-0.5">
             <span class="text-slate-400 text-[10px] uppercase">Live Staging Preview:</span>
             <div class="text-indigo-400 truncate font-bold">
               <a href="#" target="_blank" class="hover:underline flex items-center gap-1">
@@ -1403,19 +1457,19 @@
               </a>
             </div>
           </div>
-          <div class="p-3.5 rounded-xl studio-card space-y-1">
+          <div class="p-3 rounded-xl studio-card space-y-0.5">
             <span class="text-slate-400 text-[10px] uppercase">Milestone Billing (50/50):</span>
             <div class="text-emerald-400 font-bold">Advance Received · 50% on Launch</div>
           </div>
         </div>
 
         <!-- Document Downloads -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-          <button onclick="previewA4Document('quotation')" class="py-2.5 rounded-xl font-mono text-xs border studio-card flex items-center justify-center gap-2 text-slate-200 hover:text-white">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+          <button onclick="previewA4Document('quotation')" class="tactile-btn py-2 rounded-xl font-mono text-xs border studio-card flex items-center justify-center gap-1.5 text-slate-200 hover:text-white" data-tooltip="Download Official Quotation PDF" title="Download Official Quotation PDF">
             <i data-lucide="download" class="w-3.5 h-3.5 text-indigo-400"></i>
             <span>Download Official Quotation</span>
           </button>
-          <button onclick="previewA4Document('invoice')" class="py-2.5 rounded-xl font-mono text-xs border studio-card flex items-center justify-center gap-2 text-slate-200 hover:text-white">
+          <button onclick="previewA4Document('invoice')" class="tactile-btn py-2 rounded-xl font-mono text-xs border studio-card flex items-center justify-center gap-1.5 text-slate-200 hover:text-white" data-tooltip="Download Commercial Invoice PDF" title="Download Commercial Invoice PDF">
             <i data-lucide="download" class="w-3.5 h-3.5 text-emerald-400"></i>
             <span>Download Commercial Invoice</span>
           </button>
@@ -1429,71 +1483,71 @@
   <!-- ==========================================================================
        MODAL B: PIN-LOCKED ADMIN CONSOLE (PIN: 2500 / Ctrl+Shift+A)
        ========================================================================== -->
-  <div id="adminConsoleModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 sheet-modal-backdrop">
-    <div class="studio-card sheet-modal-content rounded-2xl w-full max-w-2xl p-6 sm:p-8 space-y-6">
+  <div id="adminConsoleModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-6 sheet-modal-backdrop">
+    <div class="studio-card sheet-modal-content rounded-2xl w-full max-w-2xl p-5 sm:p-7 space-y-5">
       
-      <div class="flex items-center justify-between border-b pb-4" style="border-color: var(--border-color);">
+      <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--border-color);">
         <div class="flex items-center gap-2">
           <i data-lucide="shield-check" class="w-5 h-5 text-amber-400"></i>
           <div>
-            <h3 class="font-heading font-bold text-lg text-white">Sazim Admin Console</h3>
-            <p class="text-[11px] font-mono text-slate-400">Quotation & Invoice Document Generator</p>
+            <h3 class="font-heading font-bold text-base text-white">Sazim Admin Console</h3>
+            <p class="text-[10px] font-mono text-slate-400">Quotation & Invoice Document Generator</p>
           </div>
         </div>
-        <button onclick="closeAdminConsoleModal()" class="p-2 rounded-lg studio-card text-slate-400 hover:text-white">
+        <button onclick="closeAdminConsoleModal()" class="tactile-btn p-1.5 rounded-lg studio-card text-slate-400 hover:text-white" data-tooltip="Close console" title="Close console">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
       <!-- Admin Document Editor Form -->
-      <div class="space-y-4 text-xs font-mono">
-        <div class="grid grid-cols-2 gap-3">
+      <div class="space-y-3 text-xs font-mono">
+        <div class="grid grid-cols-2 gap-2.5">
           <div>
             <label class="block text-slate-400 mb-1">Doc Type</label>
-            <select id="admDocType" class="w-full px-3 py-2 rounded-xl studio-card text-white focus:outline-none">
+            <select id="admDocType" class="w-full px-2.5 py-1.5 rounded-xl studio-card text-white focus:outline-none">
               <option value="quotation">Official Quotation</option>
               <option value="invoice">Commercial Invoice</option>
             </select>
           </div>
           <div>
             <label class="block text-slate-400 mb-1">Order ID</label>
-            <input type="text" id="admOrderId" value="#NGD-8492" class="w-full px-3 py-2 rounded-xl studio-card text-white focus:outline-none" />
+            <input type="text" id="admOrderId" value="#NGD-8492" class="w-full px-2.5 py-1.5 rounded-xl studio-card text-white focus:outline-none" />
           </div>
           <div>
             <label class="block text-slate-400 mb-1">Client Name</label>
-            <input type="text" id="admClientName" value="Mahmudul Hasan" class="w-full px-3 py-2 rounded-xl studio-card text-white focus:outline-none" />
+            <input type="text" id="admClientName" value="Mahmudul Hasan" class="w-full px-2.5 py-1.5 rounded-xl studio-card text-white focus:outline-none" />
           </div>
           <div>
             <label class="block text-slate-400 mb-1">Client Company</label>
-            <input type="text" id="admCompany" value="Apex Lifestyle Ltd" class="w-full px-3 py-2 rounded-xl studio-card text-white focus:outline-none" />
+            <input type="text" id="admCompany" value="Apex Lifestyle Ltd" class="w-full px-2.5 py-1.5 rounded-xl studio-card text-white focus:outline-none" />
           </div>
           <div>
             <label class="block text-slate-400 mb-1">Client WhatsApp</label>
-            <input type="text" id="admPhone" value="+880 1711-000000" class="w-full px-3 py-2 rounded-xl studio-card text-white focus:outline-none" />
+            <input type="text" id="admPhone" value="+880 1711-000000" class="w-full px-2.5 py-1.5 rounded-xl studio-card text-white focus:outline-none" />
           </div>
           <div>
             <label class="block text-slate-400 mb-1">Total Amount (৳ BDT or $ USD)</label>
-            <input type="text" id="admPrice" value="৳ 25,000 BDT" class="w-full px-3 py-2 rounded-xl studio-card text-emerald-400 font-bold focus:outline-none" />
+            <input type="text" id="admPrice" value="৳ 25,000 BDT" class="w-full px-2.5 py-1.5 rounded-xl studio-card text-emerald-400 font-bold focus:outline-none" />
           </div>
           <div class="col-span-2">
             <label class="block text-slate-400 mb-1">Itemized Scope & Deliverables</label>
-            <textarea id="admScope" rows="3" class="w-full px-3 py-2 rounded-xl studio-card text-white focus:outline-none">Full E-Commerce Brand Storefront (5 Pages), bKash/Nagad Merchant Checkout, Steadfast Courier Sync, Full Admin Inventory Panel, Custom Domain Connection (.com.bd) + SSL.</textarea>
+            <textarea id="admScope" rows="2" class="w-full px-2.5 py-1.5 rounded-xl studio-card text-white focus:outline-none">Full E-Commerce Brand Storefront (5 Pages), bKash/Nagad Merchant Checkout, Steadfast Courier Sync, Full Admin Inventory Panel, Custom Domain Connection (.com.bd) + SSL.</textarea>
           </div>
           <div>
             <label class="block text-slate-400 mb-1">Delivery SLA</label>
-            <input type="text" id="admSLA" value="7 Business Days" class="w-full px-3 py-2 rounded-xl studio-card text-white focus:outline-none" />
+            <input type="text" id="admSLA" value="7 Business Days" class="w-full px-2.5 py-1.5 rounded-xl studio-card text-white focus:outline-none" />
           </div>
           <div>
             <label class="block text-slate-400 mb-1">Document Validity</label>
-            <input type="text" id="admValidity" value="14 Days from Issue" class="w-full px-3 py-2 rounded-xl studio-card text-white focus:outline-none" />
+            <input type="text" id="admValidity" value="14 Days from Issue" class="w-full px-2.5 py-1.5 rounded-xl studio-card text-white focus:outline-none" />
           </div>
         </div>
 
-        <div class="flex items-center gap-3 pt-3 border-t" style="border-color: var(--border-color);">
-          <button onclick="adminSaveAndPrint()" class="flex-1 py-3 rounded-xl font-mono font-bold text-xs text-white" style="background-color: var(--accent);">
+        <div class="flex items-center gap-2.5 pt-2 border-t" style="border-color: var(--border-color);">
+          <button onclick="adminSaveAndPrint()" class="tactile-btn flex-1 py-2.5 rounded-xl font-mono font-bold text-xs text-white" style="background-color: var(--accent);" data-tooltip="Open printable stamped document" title="Open printable stamped document">
             <i data-lucide="printer" class="w-3.5 h-3.5 inline mr-1"></i> Preview & Print A4 Document
           </button>
-          <button onclick="adminSendDocWhatsApp()" class="px-4 py-3 rounded-xl font-mono text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 hover:bg-emerald-500/30">
+          <button onclick="adminSendDocWhatsApp()" class="tactile-btn px-3 py-2.5 rounded-xl font-mono text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 hover:bg-emerald-500/30" data-tooltip="Send link directly to client WhatsApp" title="Send link directly to client WhatsApp">
             <i data-lucide="message-circle" class="w-3.5 h-3.5 inline mr-1"></i> Send to Client WA
           </button>
         </div>
@@ -1505,37 +1559,37 @@
   <!-- ==========================================================================
        MODAL C: PRINTABLE STAMPED A4 CORPORATE DOCUMENT VIEWER
        ========================================================================== -->
-  <div id="a4PreviewModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-2 sm:p-6 sheet-modal-backdrop">
-    <div class="bg-white text-slate-900 rounded-2xl w-full max-w-3xl max-h-[95dvh] overflow-y-auto p-6 sm:p-10 shadow-2xl space-y-6 relative font-sans">
+  <div id="a4PreviewModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-2 sm:p-5 sheet-modal-backdrop">
+    <div class="bg-white text-slate-900 rounded-2xl w-full max-w-3xl max-h-[95dvh] overflow-y-auto p-5 sm:p-8 shadow-2xl space-y-5 relative font-sans">
       
       <!-- Top Action Bar for Viewer -->
-      <div class="flex items-center justify-between pb-4 border-b border-slate-200 no-print">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200 no-print">
         <div class="text-xs font-mono text-slate-600 font-bold flex items-center gap-2">
           <i data-lucide="file-check" class="w-4 h-4 text-emerald-600"></i>
           <span>Official A4 Document View (NextGenDev™ Studio)</span>
         </div>
         <div class="flex items-center gap-2">
-          <button onclick="window.print()" class="px-4 py-2 rounded-lg font-mono font-bold text-xs bg-indigo-600 text-white hover:bg-indigo-700 flex items-center gap-1.5 shadow">
+          <button onclick="window.print()" class="tactile-btn px-3.5 py-1.5 rounded-lg font-mono font-bold text-xs bg-indigo-600 text-white hover:bg-indigo-700 flex items-center gap-1.5 shadow" data-tooltip="Print document or save as PDF" title="Print document or save as PDF">
             <i data-lucide="printer" class="w-3.5 h-3.5"></i>
             <span>Print / Save as PDF</span>
           </button>
-          <button onclick="closeA4PreviewModal()" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700">
+          <button onclick="closeA4PreviewModal()" class="tactile-btn p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700" data-tooltip="Close preview" title="Close preview">
             <i data-lucide="x" class="w-4 h-4"></i>
           </button>
         </div>
       </div>
 
       <!-- PRINTABLE A4 CONTENT CONTAINER -->
-      <div id="printContainer" class="space-y-6 text-[13px] leading-relaxed text-slate-800">
+      <div id="printContainer" class="space-y-5 text-[12.5px] leading-relaxed text-slate-800">
         
         <!-- Document Letterhead -->
-        <div class="flex justify-between items-start pb-6 border-b-2 border-slate-900">
+        <div class="flex justify-between items-start pb-4 border-b-2 border-slate-900">
           <div>
-            <h1 class="text-2xl font-bold font-heading tracking-tight text-slate-900">NextGenDev™ Studio</h1>
-            <div class="text-xs font-mono text-indigo-700 font-semibold tracking-wider uppercase mt-0.5">
+            <h1 class="text-xl font-bold font-heading tracking-tight text-slate-900">NextGenDev™ Studio</h1>
+            <div class="text-[11px] font-mono text-indigo-700 font-semibold tracking-wider uppercase mt-0.5">
               CUSTOM WEBSITE & SOFTWARE ENGINEERING
             </div>
-            <div class="text-[11px] text-slate-600 mt-2 font-mono space-y-0.5">
+            <div class="text-[10px] text-slate-600 mt-1.5 font-mono space-y-0.5">
               <div>Lead Engineer: <strong>Sazim Hasan Pial</strong> (@sazimhasanpial)</div>
               <div>CSE @ AIUB | Full-Stack Web, C/C++, Data Structures & AI</div>
               <div>Dhaka, Bangladesh · WhatsApp: +880 1729-962141</div>
@@ -1543,26 +1597,26 @@
             </div>
           </div>
           <div class="text-right font-mono">
-            <div class="text-xl font-bold uppercase text-slate-900" id="docTypeHeading">OFFICIAL QUOTATION</div>
-            <div class="text-xs font-bold text-indigo-600 mt-1" id="docIdDisplay">#NGD-8492</div>
-            <div class="text-[11px] text-slate-500 mt-1" id="docDateDisplay">Date: Nov 14, 2026</div>
-            <div class="text-[11px] text-slate-500" id="docValidDisplay">Validity: 14 Days</div>
+            <div class="text-lg font-bold uppercase text-slate-900" id="docTypeHeading">OFFICIAL QUOTATION</div>
+            <div class="text-xs font-bold text-indigo-600 mt-0.5" id="docIdDisplay">#NGD-8492</div>
+            <div class="text-[10px] text-slate-500 mt-0.5" id="docDateDisplay">Date: Nov 14, 2026</div>
+            <div class="text-[10px] text-slate-500" id="docValidDisplay">Validity: 14 Days</div>
           </div>
         </div>
 
         <!-- Bill To / Client Details -->
-        <div class="grid grid-cols-2 gap-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono">
+        <div class="grid grid-cols-2 gap-4 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono">
           <div>
-            <div class="text-[10px] uppercase text-slate-500 font-bold">CLIENT INFORMATION:</div>
-            <div class="text-sm font-bold text-slate-900 mt-1" id="docClientName">Mahmudul Hasan</div>
-            <div class="text-slate-600" id="docClientCompany">Apex Lifestyle Ltd</div>
-            <div class="text-slate-600" id="docClientPhone">+880 1711-000000</div>
+            <div class="text-[9px] uppercase text-slate-500 font-bold">CLIENT INFORMATION:</div>
+            <div class="text-sm font-bold text-slate-900 mt-0.5" id="docClientName">Mahmudul Hasan</div>
+            <div class="text-slate-600 text-[11px]" id="docClientCompany">Apex Lifestyle Ltd</div>
+            <div class="text-slate-600 text-[11px]" id="docClientPhone">+880 1711-000000</div>
           </div>
           <div>
-            <div class="text-[10px] uppercase text-slate-500 font-bold">PROJECT SPECIFICATION:</div>
-            <div class="text-slate-700 mt-1">Platform: NextGenDev™ Production Build</div>
-            <div class="text-slate-700">Delivery SLA: <span class="font-bold text-slate-900" id="docSlaDisplay">7 Business Days</span></div>
-            <div class="text-slate-700">Warranty: 30 Days Free Bug-Fix Support</div>
+            <div class="text-[9px] uppercase text-slate-500 font-bold">PROJECT SPECIFICATION:</div>
+            <div class="text-slate-700 text-[11px] mt-0.5">Platform: NextGenDev™ Production Build</div>
+            <div class="text-slate-700 text-[11px]">Delivery SLA: <span class="font-bold text-slate-900" id="docSlaDisplay">7 Business Days</span></div>
+            <div class="text-slate-700 text-[11px]">Warranty: 30 Days Free Bug-Fix Support</div>
           </div>
         </div>
 
@@ -1570,43 +1624,43 @@
         <table class="w-full text-left border-collapse font-mono text-xs">
           <thead>
             <tr class="border-b-2 border-slate-900 text-slate-700">
-              <th class="py-2">ITEM DESCRIPTION</th>
-              <th class="py-2 text-center">QTY</th>
-              <th class="py-2 text-right">TOTAL</th>
+              <th class="py-1.5">ITEM DESCRIPTION</th>
+              <th class="py-1.5 text-center">QTY</th>
+              <th class="py-1.5 text-right">TOTAL</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-200">
             <tr>
-              <td class="py-3 pr-4">
+              <td class="py-2.5 pr-4">
                 <div class="font-bold text-slate-900" id="docScopeTitle">Full E-Commerce Brand Store Architecture</div>
-                <div class="text-[11px] text-slate-600 mt-1" id="docScopeDesc">
+                <div class="text-[11px] text-slate-600 mt-0.5" id="docScopeDesc">
                   Custom coded shopping engine, bKash & Nagad merchant checkout, automated Steadfast courier API integration, inventory admin panel, custom domain connection, and 99+ Google Lighthouse optimization.
                 </div>
               </td>
-              <td class="py-3 text-center align-top font-bold">1</td>
-              <td class="py-3 text-right align-top font-bold text-slate-900 text-sm" id="docPriceDisplay">৳ 25,000</td>
+              <td class="py-2.5 text-center align-top font-bold">1</td>
+              <td class="py-2.5 text-right align-top font-bold text-slate-900 text-sm" id="docPriceDisplay">৳ 25,000</td>
             </tr>
           </tbody>
           <tfoot>
-            <tr class="border-t-2 border-slate-900 text-sm">
-              <th colspan="2" class="py-3 text-right font-bold">TOTAL CONTRACT VALUE:</th>
-              <th class="py-3 text-right font-bold text-indigo-700 text-base" id="docTotalDisplay">৳ 25,000 BDT</th>
+            <tr class="border-t-2 border-slate-900 text-xs">
+              <th colspan="2" class="py-2 text-right font-bold">TOTAL CONTRACT VALUE:</th>
+              <th class="py-2 text-right font-bold text-indigo-700 text-sm" id="docTotalDisplay">৳ 25,000 BDT</th>
             </tr>
-            <tr class="text-xs text-slate-600">
-              <td colspan="2" class="py-1 text-right">50% Advance Milestone (Project Initiation):</td>
-              <td class="py-1 text-right font-bold" id="docAdvanceDisplay">৳ 12,500 BDT</td>
+            <tr class="text-[11px] text-slate-600">
+              <td colspan="2" class="py-0.5 text-right">50% Advance Milestone (Project Initiation):</td>
+              <td class="py-0.5 text-right font-bold" id="docAdvanceDisplay">৳ 12,500 BDT</td>
             </tr>
-            <tr class="text-xs text-slate-600">
-              <td colspan="2" class="py-1 text-right">50% Final Milestone (Staging Approval & Launch):</td>
-              <td class="py-1 text-right font-bold" id="docFinalDisplay">৳ 12,500 BDT</td>
+            <tr class="text-[11px] text-slate-600">
+              <td colspan="2" class="py-0.5 text-right">50% Final Milestone (Staging Approval & Launch):</td>
+              <td class="py-0.5 text-right font-bold" id="docFinalDisplay">৳ 12,500 BDT</td>
             </tr>
           </tfoot>
         </table>
 
         <!-- Payment Instructions -->
-        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5 text-xs font-mono">
-          <div class="font-bold text-slate-900 uppercase">OFFICIAL PAYMENT CHANNELS (BANGLADESH):</div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-700">
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-1 text-xs font-mono">
+          <div class="font-bold text-slate-900 uppercase text-[10px]">OFFICIAL PAYMENT CHANNELS (BANGLADESH):</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[10px] text-slate-700">
             <div>• bKash (Merchant / Personal): <strong>01729962141</strong></div>
             <div>• Nagad (Personal): <strong>01729962141</strong></div>
             <div>• Bank Wire: Available upon request</div>
@@ -1615,17 +1669,17 @@
         </div>
 
         <!-- Terms & Signature Block -->
-        <div class="pt-6 border-t border-slate-300 flex justify-between items-end">
-          <div class="text-[10px] text-slate-500 font-mono max-w-sm space-y-1">
+        <div class="pt-4 border-t border-slate-300 flex justify-between items-end">
+          <div class="text-[9.5px] text-slate-500 font-mono max-w-sm space-y-0.5">
             <div>Governed under Bangladesh Digital Commerce Guidelines & Contract Law.</div>
             <div>Valid for 14 calendar days from date of issuance. Stamped digitally.</div>
           </div>
           <div class="text-right">
-            <div class="inline-block border-b-2 border-slate-900 pb-1 text-center font-mono">
-              <div class="font-bold text-indigo-800 text-sm italic font-serif">Sazim Hasan Pial</div>
-              <div class="text-[9px] uppercase tracking-wider text-slate-600">Authorized Studio Engineer</div>
+            <div class="inline-block border-b-2 border-slate-900 pb-0.5 text-center font-mono">
+              <div class="font-bold text-indigo-800 text-xs italic font-serif">Sazim Hasan Pial</div>
+              <div class="text-[8.5px] uppercase tracking-wider text-slate-600">Authorized Studio Engineer</div>
             </div>
-            <div class="text-[10px] font-mono text-emerald-700 mt-1 font-bold">● DIGITALLY VERIFIED STAMP</div>
+            <div class="text-[9px] font-mono text-emerald-700 mt-0.5 font-bold">● DIGITALLY VERIFIED STAMP</div>
           </div>
         </div>
 
@@ -1637,17 +1691,17 @@
   <!-- ==========================================================================
        MODAL D: LEGAL POLICIES (TOS / PRIVACY / REFUND SLA)
        ========================================================================== -->
-  <div id="legalModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 sheet-modal-backdrop">
-    <div class="studio-card sheet-modal-content rounded-2xl w-full max-w-2xl max-h-[90dvh] overflow-y-auto p-6 sm:p-8 space-y-6">
+  <div id="legalModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-6 sheet-modal-backdrop">
+    <div class="studio-card sheet-modal-content rounded-2xl w-full max-w-2xl max-h-[90dvh] overflow-y-auto p-5 sm:p-7 space-y-5">
       
-      <div class="flex items-center justify-between border-b pb-4" style="border-color: var(--border-color);">
-        <h3 id="legalModalTitle" class="font-heading font-bold text-lg text-white">Studio Policy</h3>
-        <button onclick="closeLegalModal()" class="p-2 rounded-lg studio-card text-slate-400 hover:text-white">
+      <div class="flex items-center justify-between border-b pb-3" style="border-color: var(--border-color);">
+        <h3 id="legalModalTitle" class="font-heading font-bold text-base text-white">Studio Policy</h3>
+        <button onclick="closeLegalModal()" class="tactile-btn p-1.5 rounded-lg studio-card text-slate-400 hover:text-white" data-tooltip="Close policy" title="Close policy">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <div id="legalModalBody" class="space-y-4 text-xs font-mono text-slate-300 leading-relaxed">
+      <div id="legalModalBody" class="space-y-3 text-xs font-mono text-slate-300 leading-relaxed">
         <!-- Injected via JS -->
       </div>
 
